@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "silk",
 
     # ninja api
+    'ninja',
     'ninja_jwt',
     "ninja_extra",
     #bootstrap5

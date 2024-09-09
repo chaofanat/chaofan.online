@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.css">
+    <!-- Theme for CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/theme/dracula.min.css">
+    <link href="/static/picture/icon.PNG" rel="icon">
+    <style>
+        /* Custom styles */
+
+        .card-footer {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* 为 .tab-content 添加样式 */
+        .CodeMirror {
+            height: 100%;
+
+            border: 1px solid #ccc;
+            /* 可选：添加边框 */
+            padding: 10px;
+            /* 可选：添加内边距 */
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'freehtml/header.html' %}
+    <main class="container mt-4 mb-4">
+        <div class="row" style="height: 90vh;">
+            <div class="col-md-6 d-flex flex-column" style="height: 100%;">
+                <!-- Tab navigation -->
+                <div class="d-flex justify-content-between">
+                    <ul class="nav nav-tabs mb-3" id="codeTabs" role="tablist" style="height: auto;">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="html-tab" data-bs-toggle="tab"
+                                data-bs-target="#html-tab-pane" type="button" role="tab" aria-controls="html-tab-pane"
+                                aria-selected="true">HTML</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="css-tab" data-bs-toggle="tab" data-bs-target="#css-tab-pane"
+                                type="button" role="tab" aria-controls="css-tab-pane" aria-selected="false">CSS</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="js-tab" data-bs-toggle="tab" data-bs-target="#js-tab-pane"
+                                type="button" role="tab" aria-controls="js-tab-pane"
+                                aria-selected="false">JavaScript</button>
+                        </li>
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-danger" id="reset-btn">Reset</button>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#saveModel"
+                                id="save-btn">Save</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="codeTabContent" style="height: calc(100% - 56px);">
+                    <div class="tab-pane fade show active" id="html-tab-pane" role="tabpanel" aria-labelledby="html-tab"
+                        tabindex="0" style="height:100%">
+                        <textarea id="html-code" class="form-control"></textarea>
+                    </div>
+                    <div class="tab-pane fade" id="css-tab-pane" role="tabpanel" aria-labelledby="css-tab" tabindex="0"
+                        style="height:100%">
+                        <textarea id="css-code" class="form-control"></textarea>
+                    </div>
+                    <div class="tab-pane fade" id="js-tab-pane" role="tabpanel" aria-labelledby="js-tab" tabindex="0"
+                        style="height:100%">
+                        <textarea id="js-code" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Live preview -->
+                <div style="height:56px"></div>
+                <div class="card" style="height:calc(100% - 56px);">
+                    <div class="card-body p-0">
+                        <iframe id="live-preview" class="w-100 h-100 border-0" src="about:blank"></iframe>
+                    </div>
+                    <!-- <div class="card-footer text-muted">
+                        <p>Console errors: <span class="badge badge-danger">0</span></p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ###################################################模态框################################################# -->
+    <div class="modal fade" id="saveModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Title</h5>
+                    <button type="button" id="closesavemodal" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editTitleForm">
+                        <div class="mb-3">
+                            <label for="titleInput" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="titleInput" name="title"
+                                value="{{ comphtml.title }}" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitTitleBtn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'freehtml/footer.html' %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.7/mode/javascript/javascript.min.js"></script>
+
+    <script>
+        // #######################################################################################################codemirror渲染
+        // Initialize CodeMirror instances
+        var htmlEditor = CodeMirror.fromTextArea(document.getElementById('html-code'), {
+            mode: 'htmlmixed',
+            theme: 'dracula'
+        });
+
+        var cssEditor = CodeMirror.fromTextArea(document.getElementById('css-code'), {
+            mode: 'css',
+            theme: 'dracula'
+        });
+
+        var jsEditor = CodeMirror.fromTextArea(document.getElementById('js-code'), {
+            mode: 'javascript',
+            theme: 'dracula'
+        });
+
+        function escapeTemplate(str) {
+            return str.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+        }
+
+        // Update live preview on change
+        function updatePreview() {
+            var html = htmlEditor.getValue();
+            var css = cssEditor.getValue();
+            var js = jsEditor.getValue();
+
+
+            doc = `
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <style>${css}</style>
+            </head>
+            <body>
+                ${html}
+                <script>${js}<//script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"><//script>
+            </body>
+            </html>`;
+            // 去除doc中多余的转义符号
+            doc = doc.replace(/\/\/script/g, '\/script');
+            iframe = document.getElementById('live-preview');
+            iframe.srcdoc = doc;
+            iframe.onload = function () {
+                console.log('iframe loaded');
+            };
+        }
+
+        htmlEditor.on('change', updatePreview);
+        cssEditor.on('change', updatePreview);
+        jsEditor.on('change', updatePreview);
+        // Initial update
+        updatePreview();
+        const id = '{{comphtml.id}}';
+        if (id) {
+            htmlEditor.setValue(`{{ comphtml.content|safe }}`);
+            cssEditor.setValue(`{{ comphtml.extrastyle|safe }}`);
+            jsEditor.setValue(`{{ comphtml.extrascript|safe }}`);
+        }
+
+        // #######################################################################################################业务逻辑
+        document.getElementById('reset-btn').addEventListener('click', function () {
+            if (id) {
+                htmlEditor.setValue(`{{ comphtml.content|safe }}`);
+                cssEditor.setValue(`{{ comphtml.extrastyle|safe }}`);
+                jsEditor.setValue(`{{ comphtml.extrascript|safe }}`);
+            } else {
+                htmlEditor.setValue('');
+                cssEditor.setValue('');
+                jsEditor.setValue('');
+            }
+        });
+
+        document.getElementById('submitTitleBtn').addEventListener('click', function () {
+            var html = htmlEditor.getValue();
+            var css = cssEditor.getValue();
+            var js = jsEditor.getValue();
+            var title = document.getElementById('titleInput').value;
+
+
+            if (id) {
+                updateCompHtml(id, title, html, css, js)
+                    .then(() => {
+                        document.getElementById('closesavemodal').click();
+                        alert('更新成功');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        alert('更新失败');
+                    });
+            } else {
+                createCompHtml(title, html, css, js)
+                    .then(() => {
+                        document.getElementById('closesavemodal').click();
+                        alert('创建成功');
+                        //重定向至管理界面
+                        location.href = "{% url 'comphtml-admin-list' %}";
+                    }).catch(error => {
+                        alert('创建失败');
+                    });
+            }
+            
+
+        })
+
+        async function createCompHtml(title, content, extrastyle, extrascript) {
+            const response = await fetch('/freehtml/create/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCsrfToken()
+                },
+                body: JSON.stringify({ title, content, extrastyle, extrascript })
+            });
+
+            if (!response.ok) {
+                const errors = await response.json();
+                console.log('Error:', errors.detail);
+                throw new Error(`HTTP error! Status: ${response.status}`);
+
+            }
+            else {
+                const data = await response.json();
+                console.log('Record created:', data);
+            }
+        }
+
+        async function updateCompHtml(id, title, content, extrastyle, extrascript) {
+            const response = await fetch(`/freehtml/update/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCsrfToken()
+                },
+                body: JSON.stringify({ title, content, extrastyle, extrascript })
+            })
+
+            if (!response.ok) {
+                const errors = await response.json();
+                console.log('Error:', errors.detail);
+                throw new Error(`HTTP error! Status: ${response.status}`);
+
+            }
+            else {
+                const data = await response.json();
+                console.log('Record update:', data);
+            }
+        }
+
+        function getCsrfToken() {
+            const csrfToken = '{{ csrf_token }}'
+            return csrfToken;
+        }
+
+
+    </script>
+</body>
+
+</html>

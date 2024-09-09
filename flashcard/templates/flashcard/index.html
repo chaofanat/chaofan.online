@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闪卡学习系统</title>
+    <!-- 引入Bootstrap CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'library/bootstrap5/css/bootstrap.min.css' %}" />
+    <link rel="shortcut icon" href="{% static 'picture/icon.png' %}" />
+    <style>
+        /* 设置主体内容的padding-top */
+        .main-content {
+            padding-top: var(--bs-navbar-height);
+        }
+        /* 定义导航栏高度的CSS变量 */
+        :root {
+            --bs-navbar-height: 56px; /* Bootstrap 5 默认导航栏高度 */
+        }
+        /* 添加一些现代感的样式 */
+        .header {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        /* 使用Flexbox让footer始终位于底部 */
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 至少占据视口高度 */
+        }
+        .flex-fill {
+            flex-grow: 1; /* 占据剩余空间 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex-container">
+        <header id="header" class="header navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+                <a href="/flashcard/" class="navbar-brand d-flex align-items-center">
+                    <!-- Uncomment the line below if you also wish to use an image logo -->
+                    <!-- <img src="/static/myblog/assets/img/logo.png" alt=""> -->
+                    <h3>ChaoFanOnline-FlashCard</h3>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav  d-flex align-items-center justify-content-between" >
+                    <li class="nav-item"><a class="nav-link" href="/flashcard/">闪卡主页</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/myblog/contact.html">联系方式</a></li>
+                    <li>
+                    <form class="nav-link" id="logout-form" style="display: inline;" method="post" action="{% url 'account_logout' %}" >
+                        {% csrf_token %}
+                        <button class="btn btn-link" type="submit" style="background: none;border: none;cursor: pointer;padding: 0;text-decoration: none;padding: 2px;">登出</button>
+                      </form>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- 页面主体部分 -->
+         {% block content %}
+        <main class="container mt-4 main-content flex-fill">
+            <div class="row mt-4 d-flex justify-content-between">
+                <h3 class="text-left col-md-4 col-sm-6">你的闪卡集合</h3>
+                 <!-- 创建新闪卡集合按钮 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="col-md-12 text-center">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createDeckModal">创建新的闪卡集合</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 闪卡集合列表 -->
+            <div class="row mt-4" id="deck_list">
+                <!-- js获取数据 -->
+                 <script>
+                    // get方式获取数据
+                   fetch("/api/flashcard/FlashcardSet/list").then(
+                    response => response.json()
+                   ).then(data => {
+                    for(let i = 0; i < data.length; i++){
+                        let deck = data[i];
+                        let deck_html = `
+                        <!-- <a href="/flashcard/card/${deck.id}" class="text-decoration-none col-md-4 col-sm-6 mb-4" display="block"> -->
+                        <div class="col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100 shadow-sm rounded-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">${deck.title}</h5>
+                                    <p class="card-text">${deck.description}</p>
+                                    
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center card-footer">
+                                        <div><small class="fs-6">Id:${deck.id}</small></div>
+                                        <div class="btn-group">
+                                        <a href="/flashcard/study/${deck.id}" class="btn btn-outline-success btn-sm">开始学习</a>
+                                        <a href="/flashcard/card/${deck.id}" class="btn btn-outline-primary btn-sm">进入</a>
+                                        <a href="#" id="deletecardset" data="${deck.id}" class="btn btn-outline-danger btn-sm">删除</a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </a> -->`;
+                        document.getElementById("deck_list").innerHTML += deck_html;
+                    }
+                   }
+                    
+                   )
+                </script>
+                <script>
+                    //监听删除按钮
+                    document.getElementById("deck_list").addEventListener("click", function(event){
+                        if(event.target.id == "deletecardset"){
+                            let res = confirm("确定删除吗？这将删除闪卡集下所有闪卡内容？");
+                            if(!res){
+                                return;
+                            }
+
+                            let deck_id = event.target.getAttribute("data");
+                            // 删除
+                            fetch(`/api/flashcard/FlashcardSet/${deck_id}`, {
+                                method: "DELETE",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "X-CSRFToken": "{{ csrf_token }}",
+                                }
+                            }).then(response => {
+                                if(response.status == 200){
+                                    // 删除成功
+                                    event.target.parentNode.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode.parentNode);
+                                }else{
+                                    alert("删除失败");
+                                }
+                            })
+                        }
+                    })
+                </script>
+            </div>
+
+           
+
+            <!-- 创建/编辑闪卡集合模态框 -->
+            <div class="modal fade" id="createDeckModal" tabindex="-1" aria-labelledby="createDeckModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createDeckModalLabel">创建新的闪卡集合</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="deckName" class="form-label">名称</label>
+                                    <input type="text" class="form-control" id="deckName" placeholder="输入闪卡集合名称">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="deckDescription" class="form-label">描述</label>
+                                    <textarea class="form-control" id="deckDescription" rows="3"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                            <button id="Decksubmit" type="button" class="btn btn-primary">保存</button>
+
+                            <script>
+                              document.getElementById("Decksubmit").addEventListener("click", function() {
+                                const deckName = document.getElementById("deckName").value;
+                                const deckDescription = document.getElementById("deckDescription").value;
+
+                                fetch("/api/flashcard/FlashcardSet/", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        // 如果需要处理CSRF令牌，请确保添加相应的头部
+                                        "X-CSRFToken": "{{ csrf_token }}", // 假设getCookie是一个获取CSRF令牌的函数
+                                    },
+                                    body: JSON.stringify({
+                                        title: deckName,
+                                        description: deckDescription,
+                                    }),
+                                })
+                                .then(response => {
+
+                                    if (response.ok) {
+                                        // 创建成功，可以刷新页面或执行其他操作
+                                        alert("创建成功");
+                                        console.log("创建成功");
+                                        // 刷新页面
+                                        location.reload();
+                                    } else {
+                                        // 创建失败，处理错误
+                                        console.error("创建失败");
+                                    }
+                                    return response.json()})
+                                .then(data => {
+                                    console.log("Success:", data);
+                                
+                                })
+                                .catch((error) => {
+                                    console.error("Error:", error);
+                                    // 处理错误的情况
+                                });
+                            });
+
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% endblock %}
+
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 ChaoFanOnline-FlashCard. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 引入Bootstrap JS -->
+    <script type="text/javascript" src="{% static 'library/jquery.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>
+    <script type="text/javascript" src="{% static 'library/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

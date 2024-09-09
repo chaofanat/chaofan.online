@@ -1,0 +1,220 @@
+{% extends 'myblog/myblog_base.html' %}
+{% block content %}
+<main id="main">
+
+  <!-- ======= 轮播区域 ======= -->
+  <section id="hero-slider" class="hero-slider">
+    <div class="container-md" data-aos="fade-in">
+      <div class="row">
+        <div class="col-12">
+          <div class="swiper sliderFeaturedPosts">
+            <div class="swiper-wrapper">
+              {% if featuredblog %}
+              {% for obj in featuredblog %}
+              {% if obj.type == 'carousel' %}
+              <div class="swiper-slide">
+                {% load static %}
+                <a href="/myblog/single-post.html/{{ obj.blog.id }}" class="img-bg d-flex align-items-end"
+                  style="background-image: url('/media/{{obj.blog.image }}');">
+                  <div class="img-bg-inner">
+                    <h2>{{ obj.blog.title }}</h2>
+                    <p>{{ obj.blog.summary }}</p>
+                  </div>
+                </a>
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% else %}
+              <div class="swiper-slide">
+                <a href="/myblog/single-post.html" class="img-bg d-flex align-items-end"
+                  style="background-image: url('/static/myblog/assets/img/post-slide-1.jpg');">
+                  <div class="img-bg-inner">
+                    <h2>未读取到博客内容</h2>
+                    <p>未读取到博客内容</p>
+                  </div>
+                </a>
+              </div>
+              {% endif %}
+
+
+            </div>
+
+            <div class="custom-swiper-button-next">
+              <span class="bi-chevron-right"></span>
+            </div>
+
+            <div class="custom-swiper-button-prev">
+              <span class="bi-chevron-left"></span>
+            </div>
+
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero Slider Section -->
+
+  <!-- ======= Post Grid Section ======= -->
+  <section id="posts" class="posts">
+    <div class="container" data-aos="fade-up">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <!-- 置顶 文章  -->
+          {% if featuredblog %}
+          {% for obj in featuredblog %}
+          {% if obj.type == 'all-top' %}
+          <div class="post-entry-1 lg">
+            <a href="/myblog/single-post.html/{{obj.blog.id }}"><img src="/media/{{obj.blog.image }}" alt=""
+                class="img-fluid"></a>
+            <div class="post-meta"><span class="date">{{ obj.blog.category.name }}</span> <span
+                class="mx-1">&bullet;</span> <span>{{ obj.blog.time }}</span></div>
+            <h2><a href="/myblog/single-post.html/{{obj.blog.id }}">{{ obj.blog.title }}</a></h2>
+            <p class="mb-4 d-block">{{ obj.blog.summary }}</p>
+
+            <!-- 作者元素
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="/static/myblog/assets/img/person-1.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0">Cameron Williamson</h3>
+                </div>
+              </div> -->
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <a href="/myblog/single-post.html"><img src="/static/myblog/assets/img/post-landscape-1.jpg" alt=""
+                class="img-fluid"></a>
+            <div class="post-meta"><span class="date">未找到资源</span> <span class="mx-1">&bullet;</span> <span>未找到资源</span>
+            </div>
+            <h2><a href="/myblog/single-post.html">未找到资源</a></h2>
+            <p class="mb-4 d-block">未找到资源</p>
+            {% endif %}
+          </div>
+        </div>
+
+
+        <!-- 重要 文章 2列，每列3个  -->
+        <div class="col-lg-8">
+          <div class="row g-5">
+            <div class="col-lg-4 border-start custom-border">
+              {% if all_normal_featuredblog %}
+             
+              {% for obj in all_normal_featuredblog %}
+
+              {% if forloop.counter <= 3 %} <div class="post-entry-1">
+                <a href="/myblog/single-post.html/{{ obj.blog.id }}"><img src="/media/{{obj.blog.image }}" alt=""
+                    class="img-fluid"></a>
+                <div class="post-meta"><span class="date">{{ obj.blog.category.name }}</span> <span
+                    class="mx-1">&bullet;</span> <span>{{ obj.blog.time }}</span></div>
+                <h2><a href="/myblog/single-post.html/{{obj.blog.id }}">{{ obj.blog.title }}</a></h2>
+            </div>
+
+           
+
+            {% endif %}
+
+            {% endfor %}
+     
+            {% else %}
+            <div class="post-entry-1">
+              <a href="/myblog/single-post.html"><img src="/static/myblog/assets/img/post-landscape-2.jpg" alt=""
+                  class="img-fluid"></a>
+              <div class="post-meta"><span class="date">未找到资源</span> <span class="mx-1">&bullet;</span>
+                <span>未找到资源</span>
+              </div>
+              <h2><a href="/myblog/single-post.html">未找到资源</a></h2>
+            </div>
+            {% endif %}
+          </div>
+
+
+
+
+          <div class="col-lg-4 border-start custom-border">
+            {% if all_normal_featuredblog %}
+            {% for obj in all_normal_featuredblog %}
+           
+            {% if forloop.counter > 3 %}
+          
+            <div class="post-entry-1">
+              <a href="/myblog/single-post.html/{{obj.blog.id }}"><img src="/media/{{obj.blog.image }}" alt=""
+                  class="img-fluid"></a>
+              <div class="post-meta"><span class="date">{{ obj.blog.category.name }}</span> <span
+                  class="mx-1">&bullet;</span> <span>{{ obj.blog.time }}</span></div>
+              <h2><a href="/myblog/single-post.html/{{obj.blog.id }}">{{ obj.blog.title }}</a></h2>
+          </div>
+
+
+
+          {% endif %}
+
+          {% endfor %}
+          {% else %}
+          <div class="post-entry-1">
+            <a href="/myblog/single-post.html"><img src="/static/myblog/assets/img/post-landscape-2.jpg" alt=""
+                class="img-fluid"></a>
+            <div class="post-meta"><span class="date">未找到资源</span> <span class="mx-1">&bullet;</span>
+              <span>未找到资源</span>
+            </div>
+            <h2><a href="/myblog/single-post.html">未找到资源</a></h2>
+          </div>
+          {% endif %}
+
+        </div>
+
+        <!-- 趋势 文章区域 -->
+        <div class="col-lg-4">
+
+          <div class="trending">
+            <h3>Trending</h3>
+            <ul class="trending-post">
+              {% if TrendBlog %}
+              {% for obj in TrendBlog %}
+              <li>
+                <a href="/myblog/single-post.html/{{ obj.id }}">
+                  <span class="number">{{ forloop.number }}</span>
+                  <h3>{{ obj.title }}</h3>
+                  <span class="author">{{ obj.author.name }}</span>
+                </a>
+              </li>
+              {% endfor %}
+              {% else %}
+              <li>
+                <a href="/myblog/single-post.html">
+                  <span class="number">1</span>
+                  <h3>未找到资源</h3>
+                  <span class="author">未找到资源</span>
+                </a>
+              </li>
+              {% endif %}
+
+            </ul>
+          </div>
+
+        </div> <!-- End Trending Section -->
+      </div>
+    </div>
+
+    </div> <!-- End .row -->
+    </div>
+  </section> <!-- End Post Grid Section -->
+
+
+  <!-- 三种布局  -->
+  <!-- ======= Culture Category Section ======= -->
+  <!-- {% include 'index_category _section2.html' %} -->
+  <!-- End Culture Category Section -->
+
+  <!-- ======= Business Category Section ======= -->
+  <!-- {% include 'index_category _section2.html' %} -->
+  <!-- End Business Category Section -->
+
+  <!-- ======= Lifestyle Category Section ======= -->
+  <!-- {% include 'index_category _section3.html' %} -->
+  <!-- End Lifestyle Category Section -->
+
+  <!-- ======= Lifestyle Category Section ======= -->
+  <!-- {% include 'index_category _section3.html' %} -->
+  <!-- End Lifestyle Category Section -->
+
+</main><!-- End #main -->
+{% endblock %}

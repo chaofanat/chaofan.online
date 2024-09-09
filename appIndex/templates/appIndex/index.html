@@ -1,0 +1,151 @@
+{% load django_bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  </meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </meta>
+  <title>{% block title %}
+    www.chaofan.online网站导航
+    {% endblock %}</title>
+  {% load static %}
+  <!-- <link rel="stylesheet" href="{% static 'library/bootstrap5/css/bootstrap.min.css' %}" /> -->
+  <link rel="shortcut icon" href="{% static 'picture/icon.png' %}" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/library/fontawesome/css/all.min.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="{% static 'library/MDB/css/mdb.min.css' %}" />
+  <style>
+    .navbar .nav-link {
+      color: #fff !important;
+    }
+  </style>
+</head>
+
+</html>
+
+<body class="">
+
+  {% block content %}
+  {% include 'appIndex/header.html' %}
+  {% endblock %}
+
+  {% block main %}
+  <main class="mt-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section>
+        <div class="row">
+          <div class="col-md-6 gx-5 mb-4">
+            <div class="bg-image hover-overlay shadow-2-strong" data-mdb-ripple-init data-mdb-ripple-color="light">
+              <img src="/media/appIndex/index_01.jpg" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-6 gx-5 mb-4">
+            <h4><strong>欢迎来到朝凡的个人站点</strong></h4>
+            <p class="text-muted">
+              首先原谅我拙劣的页面设计以及贫乏的想象力。虽然确实没有什么好设计，只是为了学习，希望 later 更好。
+            </p>
+            <p><strong>这个网站是干什么的？</strong></p>
+            <p class="text-muted">
+              在我的设想中，网站的根本职责是信息门户，用户在此处获取信息以及提交信息。而为了满足日趋复杂的信息需求，信息的逻辑、结构等等都会不断变化，
+              所以信息门户应用到更复杂的技术，如数据库、服务器、前端、后端等。综合起来当下的网站慢慢成为了服务。
+              所以本站的用途是提供信息与服务（严肃）。
+            </p>
+          </div>
+        </div>
+      </section>
+      <!--Section: Content-->
+
+      <hr class="my-5" />
+
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5"><strong>这个网站有什么？</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                <img src="/media/appIndex/index_02.jpg" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">myblog</h5>
+                <p class="card-text">
+                  我的博客写作与发布平台。没错，不只是我的博客，每个人都可以在这个平台上写作以及发布，提供良好的标签分类功能。
+                  如果真的有人用，那将是一大堆改进待执行。
+                </p>
+                <a href="/myblog/" class="btn btn-primary" data-mdb-ripple-init>Go</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                <img src="/media/appIndex/index_03.jpg" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">ChaoFanOnline-FlashCard</h5>
+                <p class="card-text">
+                  自己手搓的一个闪卡学习器，界面依旧是一塌糊涂。但是可能是本站最有价值的一个项目了。毕竟我本人在用。。。
+                  提供闪卡集创建、学习、管理等功能。特别的，通过安装一个配套的浏览器插件，可以快速使用右键菜单创建闪卡。
+                </p>
+                <a href="/flashcard/" class="btn btn-primary" data-mdb-ripple-init>Go</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                <img src="/media/appIndex/index_04.jpg" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">freehtml</h5>
+                <p class="card-text">
+                  一个用于收集原生的bootstrap5组件的网站，马马虎虎，可用。
+                </p>
+                <a href="/freehtml" class="btn btn-primary" data-mdb-ripple-init>Go</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: Content-->
+
+      <hr class="my-5 text-white" />
+
+      <!--Section: Content-->
+    </div>
+  </main>
+  {% endblock %}
+
+  {% block footer %}
+  <!-- Footer -->
+  {% include 'appIndex/footer.html' %}
+  <!-- Footer -->
+  {% endblock %}
+
+  <script type="text/javascript" src="{% static 'library/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'library/MDB/js/mdb.umd.min.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+{% extends 'myblog/myblog_base.html' %}
+{% block content %}
+<main id="main">
+  <section id="contact" class="contact mb-5">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <div class="col-lg-12 text-center mb-5">
+          <h1 class="page-title">Contact me</h1>
+        </div>
+      </div>
+
+      <div class="row gy-4 mb-3">
+
+        <!-- <div class="col-md-4">
+            <div class="info-item">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Address</h3>
+              <address>A108 Adam Street, NY 535022, USA</address>
+            </div>
+          </div> -->
+        <!-- End Info Item -->
+
+        <div class="col-md-6">
+          <div class="info-item info-item-borders">
+            <i class="bi bi-phone"></i>
+            <h3>Phone Number</h3>
+            <p><a href="tel:+155895548855">+86 13357738371</a></p>
+          </div>
+        </div><!-- End Info Item -->
+
+        <div class="col-md-6">
+          <div class="info-item">
+            <i class="bi bi-envelope"></i>
+            <h3>Email</h3>
+            <p><a href="mailto:info@example.com">chaofanat@qq.com or chaofanat@gmail.com</a></p>
+          </div>
+        </div><!-- End Info Item -->
+
+      </div>
+
+
+      <div class="row mt-5 mb-5">
+        <h1 class="page-title mb-3 col-md-12 text-center">OR Message me</h1>
+        <div class="col-md-12">
+          <!-- 留言表单 -->
+          <form id="leave-message-form" method="post" action="{% url 'leave_message' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="form-label"><i class="bi bi-person-fill"></i> 你的姓名</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label"><i class="bi bi-envelope-fill"></i> 你的邮箱</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label"><i class="bi bi-chat-left-text-fill"></i> 留言内容</label>
+              <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">提交留言</button>
+
+            <script>
+              // 处理表单提交
+              document.getElementById('leave-message-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // 阻止默认提交行为
+                const form = this;
+                const formData = new FormData(form);
+                fetch(form.action, {
+                  method: form.method,
+                  body: formData,
+                  headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                  }
+                })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.status === 'success') {
+                      alert(data.msg);
+                      form.reset();
+                    } else {
+                      alert(data.msg);
+                    }
+                  })
+                  .catch(error => console.error('Error:', error));
+              });
+            </script>
+          </form>
+        </div>
+      </div>
+
+      <!-- <div class="form mt-5">
+          <form action="#" method="put" role="form" class="php-email-form">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div> -->
+
+      <!-- End Contact Form -->
+
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+{% endblock%}

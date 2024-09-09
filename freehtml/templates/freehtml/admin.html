@@ -1,0 +1,208 @@
+{% extends "freehtml/index.html" %}
+{% block content %}
+<main class="my-5 flex-fill">
+    <div class="container">
+        <!-- Search form -->
+        <form method="get" action=".">
+            <div class="input-group mb-3">
+                <input type="text" name="q" class="form-control" placeholder="Search by title"
+                    value="{{ request.GET.q }}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+        <!-- 展示我的bootstrap5组件列表，可以进行浏览或者删除，提供新建按钮跳转到新建页面，提供编辑按钮跳转到编辑页面 -->
+        <div class="mb-4 d-flex justify-content-between align-items-center">
+            <h1 class="mb-4">Component List</h1>
+
+            <!-- 新建按钮 -->
+            <a href="{% url 'comphtml-new' %}" class="btn btn-primary mb-3">New Component</a>
+        </div>
+        {% if not comphtmls %}
+        <div class="alert alert-info" role="alert">
+            暂无组件，诚邀加入，存入您的bootstrap5组件，点击 <a href="{% url 'comphtml-new' %}">添加组件</a>
+        </div>
+        {% endif %}
+
+        <!-- 组件列表 -->
+        {% for comphtml in comphtmls %}
+        <section id="section-basic-example{{ comphtml.id }}" class="mb-5 col-md-12">
+            <!-- Section title -->
+            <div class="mb-4 align-items-center justify-content-between d-flex">
+                <a href="{% url 'comphtml-example' comphtml.id %}" class="btn btn-link px-3" data-bs-toggle="tooltip"
+                    data-bs-placement="right" title="前往示例网页查看完整效果">
+                    <h2 class="mb-4 d-none d-md-inline-block" style="color:black;">示例——{{ comphtml.title }}
+
+                    </h2>
+                </a>
+
+                <div>
+                    <!-- 编辑按钮 -->
+                    <a href="{% url 'comphtml-edit' comphtml.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <!-- 删除按钮 -->
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ comphtml.id }}">Delete</button>
+                </div>
+            </div>
+
+
+
+
+            <!-- Section title -->
+
+            <!--Section: Demo-->
+            <section>
+                {{ comphtml.content|safe }}
+            </section>
+
+            <!--Section: Demo-->
+            <!-- Section: buttons -->
+            <div class="p-4 text-center border-top mobile-hidden">
+                <a class="btn btn-link px-3" data-mdb-collapse-init="" href="#example{{ comphtml.id }}" role="button"
+                    id="code{{comphtml.id }}" aria-expanded="true" aria-controls="example1"
+                    data-ripple-color="hsl(0, 0%, 67%)">
+                    <i class="fas fa-code me-md-2"></i>
+                    <span class="d-none d-md-inline-block">
+                        Show code
+                    </span>
+                </a>
+                <script>
+                    document.getElementById('code{{comphtml.id }}').addEventListener("click", function (event) {
+                        target = document.getElementById('example{{comphtml.id }}');
+                        if (target.classList.contains("show")) {
+                            target.classList.remove("show");
+                        } else {
+                            target.classList.add("show");
+                        }
+
+                    });
+
+
+                </script>
+            </div>
+            <!-- Section: buttons -->
+            <!--Section: Code-->
+            <section id="example{{ comphtml.id }}" class="collapse" style="height: 400px;">
+                <div class="d-flex justify-content-between py-2" style="padding-left: .6rem;">
+
+                    <button class="btn-copy-code btn btn-sm" data-mdb-ripple-color="dark" id="copy{{ comphtml.id }}"
+                        data-mdb-ripple-unbound="true">Copy</button>
+                    <script>
+                        document.getElementById('copy{{ comphtml.id }}').addEventListener("click", function (event) {
+                            const pre = document.querySelector("pre");
+                            const text = pre.textContent;
+                            navigator.clipboard.writeText(text);
+                            alert("复制成功！");
+                        });
+                    </script>
+                </div>
+                <pre class="highlight" style="height: 100%;">
+                    <code class="language-html " style="line-height: 1.5;height: 100%;overflow-y: auto;">
+                    {{ comphtml.content }}
+                    </code>
+                </pre>
+            </section>
+            <!--Section: Code-->
+        </section>
+
+        <!-- 删除确认模态框 -->
+        <div class="modal fade" id="deleteModal{{ comphtml.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            id="deleteModal{{ comphtml.id }}Close" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the comphtml "{{ comphtml.title }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="button" id="delete-{{ comphtml.id }}" class="btn btn-danger">Delete</button>
+                            <script>
+
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    document.getElementById('delete-{{ comphtml.id }}').addEventListener('click', () => {
+                                        try {
+                                            deleteCompHtml('{{ comphtml.id }}').then(() => {
+                                                alert('Component deleted');
+                                                document.getElementById('deleteModal{{ comphtml.id }}Close').click();
+                                                location.reload();
+                                            });
+
+                                        } catch (error) {
+                                            console.error('Error deleting record:', error);
+                                            alert('Error deleting record. Please try again.');
+                                        }
+
+
+
+                                    });
+                                });
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+
+        {% if is_paginated %}
+        <div class="row mt-4">
+            <ul class="pagination pagination-circle justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                        aria-disabled="true">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link current" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+        <script>
+            function getCsrfToken() {
+                const csrfToken = '{{ csrf_token }}'
+                return csrfToken;
+            }
+            async function deleteCompHtml(id) {
+                const response = await fetch(`/freehtml/delete/${id}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCsrfToken()
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Record deleted:', data);
+            }
+
+        </script>
+    </div>
+</main>
+
+{% endblock %}

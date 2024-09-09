@@ -1,0 +1,282 @@
+{% extends 'flashcard/index.html' %}
+
+{% block content %}
+
+
+<main class="container mt-4 main-content flex-fill">
+
+    <!-- 创建新闪卡按钮 -->
+    <div class="row mt-4 d-flex justify-content-between">
+        <div class="col-md-4 col-sm-6 text-left">
+            <h4>所属卡片集：<em>{{ cardset_title }}</em></h4>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createCardModal">创建新的闪卡</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 闪卡列表 -->
+    <div class="row mt-4" id="deck_list">
+        <!-- js获取数据 -->
+         <script>
+            // get方式获取数据,params
+            const queryParams = new URLSearchParams({
+                cardset_id: "{{ cardset_id }}",
+                });
+            let cardurl = `/api/flashcard/Flashcard/list?${queryParams}`
+           fetch(cardurl).then(
+            response => response.json()
+           ).then(data => {
+            for(let i = 0; i < data.length; i++){
+                let deck = data[i];
+                let deck_html = `
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 shadow-sm rounded-3">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">${deck.front_content}</h5>
+                            <p class="card-text">${deck.back_content}</p>
+                            
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center card-footer">
+                               <p class="card-text">${deck.knowledge_level}</p>
+                               <div class="btn-group">
+                                <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editCardModal"
+                                data-card-id="${deck.id}" data-card-front_content="${deck.front_content}" data-card-back_content="${deck.back_content}" tag="editCard">编辑</a>
+                                <a href="#" id="deletecard" data="${deck.id}" class="btn btn-outline-danger btn-sm">删除</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>`;
+                document.getElementById("deck_list").innerHTML += deck_html;
+            }
+           }
+           )
+        </script>
+
+
+
+    </div>
+    <script>
+        // 删除卡片
+        document.getElementById("deck_list").addEventListener("click", function(event) {
+            if (event.target.id === "deletecard") {
+                const card_id = event.target.getAttribute("data");
+                fetch(`/api/flashcard/Flashcard/${card_id}`, {
+                    method: "DELETE",
+                    headers: {
+                       "Content-Type": "application/json",
+                       "X-CSRFToken": "{{ csrf_token }}",
+                    }
+                }).then(
+                    response => {
+                            if (response.ok) {
+                                // 删除成功
+                                event.target.parentNode.parentNode.parentNode.remove();
+                            } else {
+                                // 删除失败
+                                alert("删除失败");
+                            }
+                        }
+                )
+            }
+        })
+    </script>
+
+    
+
+    <!-- 创建闪卡模态框 -->
+    <div class="modal fade" id="createCardModal" tabindex="-1" aria-labelledby="createCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createCardModalLabel">创建新的闪卡集合</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="front_content" class="form-label">卡片正面内容</label>
+                            <input type="text" class="form-control" id="front_content" placeholder="输入闪卡正面内容">
+                        </div>
+                        <div class="mb-3">
+                            <label for="back_content" class="form-label">卡片反面内容</label>
+                            <textarea class="form-control" id="back_content" rows="5"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardset_id" class="form-label">卡片所属集合ID</label>
+                            <input type="number" class="form-control" id="cardset_id" placeholder="输入卡片所属集合ID" value="{{ cardset_id }}" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button id="cardsubmit" type="button" class="btn btn-primary">保存</button>
+
+                    <script>
+                      document.getElementById("cardsubmit").addEventListener("click", function() {
+                        const front_content = document.getElementById("front_content").value;
+                        const back_content = document.getElementById("back_content").value;
+                        const cardset_id = document.getElementById("cardset_id").value;
+
+                        fetch("/api/flashcard/Flashcard/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                // 如果需要处理CSRF令牌，请确保添加相应的头部
+                                "X-CSRFToken": "{{ csrf_token }}", // 假设getCookie是一个获取CSRF令牌的函数
+                            },
+                            body: JSON.stringify({
+                                front_content: front_content,
+                                back_content: back_content,
+                                cardset_id: cardset_id,
+                            }),
+                        })
+                        .then(response => {
+
+                            if (response.ok) {
+                                // 创建成功，可以刷新页面或执行其他操作
+                                alert("创建成功");
+                                console.log("创建成功");
+                                // 刷新页面
+                                location.reload();
+                            } else {
+                                // 创建失败，处理错误
+                                console.error("创建失败");
+                            }
+                            return response.json()})
+                        .then(data => {
+                            console.log("Success:", data);
+                        
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // 处理错误的情况
+                        });
+                    });
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 编辑闪卡模态框  -->
+    <div class="modal fade" id="editCardModal" tabindex="-1" aria-labelledby="editCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCardModalLabel">编辑闪卡</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="card_id" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="card_id" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_front_content" class="form-label">卡片正面内容</label>
+                            <input type="text" class="form-control" id="edit_front_content" placeholder="输入闪卡正面内容">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_back_content" class="form-label">卡片反面内容</label>
+                            <textarea class="form-control" id="edit_back_content" rows="5"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_cardset_id" class="form-label">卡片所属集合ID</label>
+                            <input type="number" class="form-control" id="edit_cardset_id" placeholder="输入卡片所属集合ID" value="{{ cardset_id }}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button id="cardedit" type="button" class="btn btn-primary">修改</button>
+
+                    <script>
+                      document.getElementById("cardedit").addEventListener("click", function() {
+                        const front_content = document.getElementById("edit_front_content").value;
+                        const back_content = document.getElementById("edit_back_content").value;
+                        const cardset_id = document.getElementById("edit_cardset_id").value;
+                        const card_id = document.getElementById("card_id").value;
+
+                        fetch(`/api/flashcard/Flashcard/${ card_id }`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                // 如果需要处理CSRF令牌，请确保添加相应的头部
+                                "X-CSRFToken": "{{ csrf_token }}", // 假设getCookie是一个获取CSRF令牌的函数
+                            },
+                            body: JSON.stringify({
+                                front_content: front_content,
+                                back_content: back_content,
+                                cardset_id: cardset_id,
+                            }),
+                        })
+                        .then(response => {
+
+                            if (response.ok) {
+                                // 创建成功，可以刷新页面或执行其他操作
+                                alert("修改成功");
+                                console.log("修改成功");
+                                // 刷新页面
+                                location.reload();
+                            } else {
+                                // 创建失败，处理错误
+                                console.error("修改失败");
+                            }
+                            return response.json()})
+                        .then(data => {
+                            console.log("Success:", data);
+                        
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // 处理错误的情况
+                        });
+                    });
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // 监听编辑模态框
+        document.getElementById("editCardModal").addEventListener("show.bs.modal", function(event) {
+            // 获取触发事件的元素
+            var button = event.relatedTarget;
+            // 获取自定义数据属性的值
+            var cardId = button.getAttribute("data-card-id");
+            // 获取自定义数据属性的值
+            var frontContent = button.getAttribute("data-card-front_content");
+            var backContent = button.getAttribute("data-card-back_content");
+            // 获取自定义数据属性的值
+            var cardsetId = "{{ cardset_id }}";
+            // 填充模态框的输入框
+            document.getElementById("edit_front_content").value = frontContent;
+            document.getElementById("edit_back_content").value = backContent;
+            document.getElementById("edit_cardset_id").value = cardsetId;
+            document.getElementById("card_id").value = cardId;
+        })
+    </script>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

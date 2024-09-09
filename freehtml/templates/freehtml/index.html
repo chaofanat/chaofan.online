@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>我的bootstrap5 组件库</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/library/bootstrap5/css/bootstrap.min.css">
+    <link href="/static/picture/icon.PNG" rel="icon">
+    </link>
+
+    <style>
+        /* 使用Flexbox让footer始终位于底部 */
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* 至少占据视口高度 */
+        }
+
+        .flex-fill {
+            flex-grow: 1;
+            /* 占据剩余空间 */
+        }
+    </style>
+</head>
+
+<body class="flex-container">
+    {% include 'freehtml/header.html' %}
+
+    {% block content %}
+
+    <!--Main layout-->
+    <main class="my-5 flex-fill">
+        <div class="container">
+            <!-- Search form -->
+            <form method="get" action=".">
+                <div class="input-group mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Search by title"
+                        value="{{ request.GET.q }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+
+            <!--Section: Content-->
+            <section class="text-center text-md-start row">
+                <h4 class="mb-5"><strong>Bootstrap5 组件</strong></h4>
+                <!-- 当没有 comphtmls 数据时，显示提示信息 -->
+                {% if not comphtmls %}
+                <div class="alert alert-info" role="alert">
+                    暂无组件，诚邀加入，存入您的bootstrap5组件，点击 <a href="{% url 'comphtml-new' %}">添加组件</a>
+                </div>
+                {% endif %}
+                {% for comphtml in comphtmls %}
+                <section id="section-basic-example{{ comphtml.id }}" class="mb-5 col-md-12">
+                    <!-- Section title -->
+                    <a href="{% url 'comphtml-example' comphtml.id %}" class="btn btn-link px-3"
+                        data-bs-toggle="tooltip" data-bs-placement="right" title="前往示例网页查看完整效果">
+                        <h2 class="mb-4 d-none d-md-inline-block" style="color:black;">示例——{{ comphtml.title }}
+
+                        </h2>
+                    </a>
+
+                    <!-- Section title -->
+
+                    <!--Section: Demo-->
+                    <section class="mb-1">
+                        {{ comphtml.content|safe }}
+                    </section>
+
+                    <!--Section: Demo-->
+                    <!-- Section: buttons -->
+                    <div class="p-4 text-center border-top mobile-hidden">
+                        <a class="btn btn-link px-3" data-mdb-collapse-init="" href="#example{{ comphtml.id }}"
+                            role="button" id="code{{comphtml.id }}" aria-expanded="true" aria-controls="example1"
+                            data-ripple-color="hsl(0, 0%, 67%)">
+                            <i class="fas fa-code me-md-2"></i>
+                            <span class="d-none d-md-inline-block">
+                                Show code
+                            </span>
+                        </a>
+                        <script>
+                            document.getElementById('code{{comphtml.id }}').addEventListener("click", function (event) {
+                                target = document.getElementById('example{{comphtml.id }}');
+                                if (target.classList.contains("show")) {
+                                    target.classList.remove("show");
+                                } else {
+                                    target.classList.add("show");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <!-- Section: buttons -->
+                    <!--Section: Code-->
+                    <section id="example{{ comphtml.id }}" class="collapse" style="height: 400px;">
+                        <div class="d-flex justify-content-between py-2" style="padding-left: .6rem;">
+
+                            <button class="btn-copy-code btn btn-sm" data-mdb-ripple-color="dark"
+                                id="copy{{ comphtml.id }}" data-mdb-ripple-unbound="true">Copy</button>
+                            <script>
+                                document.getElementById('copy{{ comphtml.id }}').addEventListener("click", function (event) {
+                                    const pre = document.querySelector("pre");
+                                    const text = pre.textContent;
+                                    navigator.clipboard.writeText(text);
+                                    alert("复制成功！");
+                                });
+                            </script>
+                        </div>
+                        <pre class="highlight" style="height: 100%;">
+                            <code class="language-html " style="line-height: 1.5;height: 100%;overflow-y: auto;">{{ comphtml.content }}</code>
+                        </pre>
+                    </section>
+                    <!--Section: Code-->
+                </section>
+                <hr>
+                {% endfor %}
+            </section>
+            <!--Section: Content-->
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="row mt-4">
+                <ul class="pagination pagination-circle justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                            aria-disabled="true">Previous</a>
+                    </li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if num == page_obj.number %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link current" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+    <!--Main layout-->
+    {% endblock %}
+
+    <!--Footer-->
+    {% include 'freehtml/footer.html' %}
+    <!--Footer-->
+
+    <script src="/static/library/bootstrap5/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

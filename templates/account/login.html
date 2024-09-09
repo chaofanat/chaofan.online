@@ -25,21 +25,17 @@
   {% bootstrap_button button_text button_type="submit" extra_classes="secondaryAction w-100" %}
   
 </form>
-<hr/>
+
 
 {% if socialaccount_providers %}
-<p>{% trans "Or, sign in with:" %}</p>
+
+<div class="d-flex align-items-center justify-content-center my-4">
+  <p class="text-center fw-bold mx-3 mb-0 text-muted">{% trans "Or" %}</p>
+</div>
 
 
-<div class="d-flex flex-column justify-content-center aligen-items-center">
-
-  
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
 
-
-
-
-</div>
 
 {% include "socialaccount/snippets/login_extra.html" %}
 

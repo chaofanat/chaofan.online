@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ChaoFanOnline</title>
+  <meta content="blog and tools and novels" name="description">
+  <meta content="blog and tools and novels" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/static/picture/icon.PNG" rel="icon">
+
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/static/myblog/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/myblog/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/myblog/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/static/myblog/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/myblog/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS Files -->
+  <link href="/static/myblog/assets/css/variables.css" rel="stylesheet">
+  <link href="/static/myblog/assets/css/main.css" rel="stylesheet">
+  <link href="/static/myblog/assets/css/aieditor.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: ZenBlog
+  * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https:///bootstrapmade.com/license/
+  ======================================================== -->
+
+  <!-- 表单标签样式自定义 -->
+  <style>
+    .form-label {
+      font-size: 1.2em;
+      /* 增大字体大小 */
+      color: #333;
+      /* 更改字体颜色 */
+      font-weight: bold;
+      /* 加粗字体 */
+    }
+
+    .form-label i {
+      /* 添加图标 */
+      margin-right: 5px;
+      /* 图标与文本之间的间距 */
+    }
+  </style>
+
+  <!-- 引入自定义样式 -->
+  <style>
+    h1 {
+      font-size: 3em;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: #444;
+    }
+
+    h3 {
+      font-size: 1.17em;
+      color: #555;
+    }
+
+    p {
+      font-size: 1em;
+      line-height: 1.6;
+      color: #585252;
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+    }
+
+    em {
+      font-style: italic;
+      color: #888;
+    }
+
+    strong {
+      font-weight: bold;
+      color: #333;
+    }
+
+
+    a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    pre {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: 1em;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ccc;
+    }
+
+    th,
+    td {
+      padding: 0.5em;
+      text-align: left;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/myblog/index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="/static/myblog/assets/img/logo.png" alt=""> -->
+        <h1>ChaoFanOnline</h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/myblog/index.html">博客主页</a></li>
+          <li><a href="/myblog/single-post.html">阅读</a></li>
+          <li><a href="/myblog/blog_create.html">写作</a></li>
+          <li><a href="/myblog/category.html">分类</a>
+          <li><a href="/myblog/tag.html">标签归类</a></li>
+          </li>
+          <!-- 下拉菜单链接工具 -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              工具
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'flashcard' %}">闪卡学习</a></li>
+              <li><a class="dropdown-item" href="http://chaofan.online:57424">我的思源笔记</a></li>
+              <li><a class="dropdown-item" href="{% url 'comphtml-list' %}">FreeHtml</a></li>
+            </ul>
+          </li>
+
+          <!-- <li><a href="/myblog/about.html">关于</a></li> -->
+          <li><a href="/myblog/contact.html">联系方式</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+      <div class="position-relative">
+        <!-- <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
+        <a href="#" class="mx-2"><span class="bi-twitter"></span></a>
+        <a href="#" class="mx-2"><span class="bi-instagram"></span></a> -->
+
+        <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+
+        <!-- ======= Search Form ======= -->
+        <div class="search-form-wrap js-search-form-wrap">
+          <form action="https://www.baidu.com/s" method="get" class="search-form" id="search-form">
+            <span class="icon bi-search" onclick="search()"></span>
+            <script>
+              function search() {
+                const form = document.getElementById('search-form');
+                form.wd.value = form.wd.value + " site:chaofan.online";
+                form.submit();
+              }
+            </script>
+            <input type="text" placeholder="Search" name='wd' class="form-control">
+
+            <button class="btn js-search-close"><span class="bi-x"></span></button>
+
+          </form>
+        </div><!-- End Search Form -->
+
+      </div>
+
+    </div>
+
+  </header><!-- End Header -->
+
+  {% block content %}
+
+
+  {% endblock %}
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-content">
+      <div class="container">
+
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <h3 class="footer-heading">写点什么？</h3>
+            <p style="color: #ccc;">
+              在文字的海洋里航行，每一篇文章都是心灵的航标。拿起笔，不仅是记录生活，更是探索自我，创造无限可能。无论是一段短小的故事，还是一篇深邃的思考，每一次落笔都是勇气与灵感的火花碰撞。不要害怕白纸的空旷，它正等待着你用独特的色彩填满。写作，不仅是与世界的对话，也是与自己灵魂深处的邂逅。在这条路上，或许会有挑战与困惑，但正是这些让我们的思想更加坚韧，笔触愈发深刻。记住，伟大的作品往往源自平凡生活的细微观察与深刻感悟。继续写下去，让心灵的溪流汇聚成河，最终汇入智慧与情感的海洋。你的故事，就是这个世界独一无二的声音。现在，就让我们携手启程，用文字点亮心中的灯塔，照亮前行的道路。
+            </p>
+            <p><a href="/myblog/about.html" class="footer-link-more">Learn More</a></p>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h3 class="footer-heading">导航</h3>
+            <ul class="footer-links list-unstyled">
+              <li><a href="/myblog/index.html"><i class="bi bi-chevron-right"></i> 主页</a></li>
+              <li><a href="/myblog/tag.html"><i class="bi bi-chevron-right"></i> 标签归类</a></li>
+              <li><a href="/myblog/category.html"><i class="bi bi-chevron-right"></i> 分类</a></li>
+              <li><a href="/myblog/single-post.html"><i class="bi bi-chevron-right"></i> 阅读</a></li>
+              <!-- <li><a href="/myblog/about.html"><i class="bi bi-chevron-right"></i> 关于我</a></li> -->
+              <li><a href="/myblog/contact.html"><i class="bi bi-chevron-right"></i> 联系方式</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h3 class="footer-heading">外链</h3>
+            <ul class="footer-links list-unstyled">
+              <!-- <li><a href="/myblog/category.html"><i class="bi bi-chevron-right"></i> Business</a></li> -->
+
+
+            </ul>
+          </div>
+
+          <div class="col-lg-4">
+            <h3 class="footer-heading">其他</h3>
+
+            <ul class="footer-links footer-blog-entry list-unstyled">
+              <li>
+                <a href="/myblog/single-post.html" class="d-flex align-items-center">
+                  <img src="/static/myblog/assets/img/post-sq-1.jpg" alt="" class="img-fluid me-3">
+                  <div>
+                    <div class="post-meta d-block"><span class="date">未知</span> <span class="mx-1">&bullet;</span>
+                      <span>2024.6.21</span>
+                    </div>
+                    <span>where we go?</span>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <div class="container">
+
+        <div class="row justify-content-between">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <div class="copyright">
+              © Copyright <strong><span>ChaoFanOnline</span></strong>. All Rights Reserved
+            </div>
+            {% load static %}
+            <div class="credits">
+              <!-- All the links in the footer should remain intact. -->
+              <!-- You can delete the links only if you purchased the pro version. -->
+              <!-- Licensing information: https://bootstrapmade.com/license/ -->
+              <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+              <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2024052011号-1</a>&bullet;
+              <img src="{% static 'picture/beian.png' %}" width="16px" height="16px">
+              <a href=\"https://beian.mps.gov.cn/#/query/webSearch?code=51132102000222\" rel=\"noreferrer\"
+                target=\"_blank\">川公网安备51132102000222</a>
+            </div>
+
+          </div>
+
+          <div class="col-md-6">
+            <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
+              <!-- <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/static/myblog/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/myblog/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/myblog/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/myblog/assets/vendor/aos/aos.js"></script>
+  <script src="/static/myblog/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/static/myblog/assets/js/main.js"></script>
+
+
+
+  <!-- for write.html -->
+  <script type="module" src="/static/myblog/assets/js/aieditor.js "></script>
+  <script type="module">
+    import { AiEditor } from '/static/myblog/assets/js/aieditor.js';
+
+
+
+    //获取文心一言token
+    // function getAccessToken() {
+    //   const AK = '***';
+    //   const SK = '***';
+
+    //   const url = `https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=${AK}&client_secret=${SK}`;
+
+    //   return fetch(url, {
+    //     method: 'POST', 
+    //     mode: 'no-cors'
+    //     // 注意：由于参数直接拼接在URL中，这里应使用GET方法
+    //   })
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         throw new Error(`HTTP error! status: ${response.status}`);
+    //       }
+    //       return response.json(); // 解析响应体为JSON
+    //     })
+    //     .then(data => {
+    //       return data.access_token; // 返回access_token
+    //     })
+    //     .catch(error => {
+    //       console.error('There was a problem with the fetch operation:', error);
+    //       throw error; // 重新抛出错误，以便在调用处可以处理
+    //     });
+    // }
+
+
+
+
+
+
+
+
+    const aieditor = new AiEditor({
+      element: "#aiEditor",
+      placeholder: "点击输入内容...",
+      content: 'AiEditor 是一个面向 AI 的下一代富文本编辑器。',
+      ai: {
+        models: {
+          wenxin: {
+            access_token: "{{ai_apikey}}",
+            protocol: "ssl",
+            version: "v1.0"
+          }
+        }
+      },
+
+    })
+
+    //  //检查aieditor是否加载完成,若加载完成弹出提示框显示aieditor已经加载完成反之显示未加载完成
+    //  if (aieditor) {
+    //         alert("aieditor加载完成:"+aieditor.getHtml())
+    //     } else {
+    //         alert("aieditor未加载完成")
+    //     }
+
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+
+
+
+
+      //监听表单提交行为
+      if (document.getElementById("blogForm")) {
+        document.getElementById("blogForm").addEventListener("submit", (event) => {
+          event.preventDefault(); //阻止表单默认提交行为
+          //获取富文本编辑器中的内容
+          const content = aieditor.getHtml();
+          //将富文本编辑器中的内容赋值给隐藏域
+          document.getElementById("textcontent").value = content;
+
+          const formData = new FormData();
+          formData.append("content", content);
+          formData.append("title", document.getElementById("title").value);
+          formData.append("category", document.getElementById("category").value);
+          //tags是多选的，所以需要获取所有选中的标签
+          const tags = document.getElementById("tags");
+          console.log(tags);
+          for (let i = 0; i < tags.options.length; i++) {
+            if (tags.options[i].selected) {
+              formData.append("tags", tags.options[i].value);
+            }
+          }
+
+          formData.append("slug", document.getElementById("slug").value);
+
+          formData.append("author", document.getElementById("author").value);
+          formData.append("summary", document.getElementById("summary").value);
+          //添加图片文件
+          const fileInput = document.getElementById("image");
+          if (fileInput.files.length > 0) {
+            formData.append("image", fileInput.files[0]);
+          }
+          fetch("{% url 'blog_create' %}", {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: formData,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                // 如果响应状态不是 200 OK
+                return response.json().then(data => {
+                  // 解析 JSON 响应体
+                  alert("发布博客失败: " + data.msg); // 显示错误消息
+                }).catch(() => {
+                  // 如果解析 JSON 失败
+                  alert("发布博客失败: 未知错误");
+                });
+              } else {
+                // 如果响应状态是 200 OK
+                return response.json().then(data => {
+                  alert("发布博客成功");
+                  window.location.href = `/myblog/post-detail/${data.new_blog_id}`;
+                });
+              }
+            })
+            .catch(error => {
+              console.error("Fetch error:", error);
+              alert("网络错误，请稍后再试");
+            });
+        })
+      }
+
+    })
+
+
+
+
+  </script>
+
+  <!-- 优化图片显示，双击放大 -->
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('img');
+      images.forEach(image => {
+        image.addEventListener('dblclick', () => {
+          const img = document.createElement('img');
+          img.src = image.src;
+          img.style.position = 'fixed';
+          img.style.top = '0';
+          img.style.left = '0';
+          img.style.width = '100%';
+
+          document.body.appendChild(img);
+          img.addEventListener('click', () => {
+            document.body.removeChild(img);
+          })
+          img.addEventListener('dblclick', () => {
+            document.body.removeChild(img);
+          })
+          img.addEventListener('mousewheel', (event) => {
+            if (event.deltaY > 0) {
+              img.style.width = '100%';
+            } else {
+              img.style.width = '50%';
+            }
+          })
+          
+        })
+      })
+    })
+      
+   </script>
+
+</body>
+
+</html>

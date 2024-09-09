@@ -1,0 +1,206 @@
+{% extends 'myblog/myblog_base.html' %}
+{% block content %}
+<main class="container mt-5">
+    <h2 class="mb-4">撰写新博客</h2>
+    <form method="post" enctype="multipart/form-data" id="blogForm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">标题</label>
+            <input form="blogForm" type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+
+
+            <label for="content" class="form-label">内容</label>
+            <textarea form="blogForm" class="form-control" id="textcontent" name="content" hidden></textarea>
+            <div id="aiEditor" style="height: 550px;  margin: 20px"></div>
+
+
+        </div>
+        <div class="mb-3">
+            <label for="slug" class="form-label">Slug</label>
+            <input type="text" form="blogForm" class="form-control" id="slug" name="slug" placeholder="三到五个词，用短横线连接"
+                required>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="category" class="form-label">类别</label>
+                <!-- 新增类别按钮 -->
+                <button type="button" class="btn btn-secondary ms-2 bi bi-plus-circle-fill btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#newCategoryModal" aria-label="新建类别"></button>
+                <select form="blogForm" class="form-select" id="category" name="category" required>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+
+
+                <!-- 新建类别模态对话框 -->
+                <div class="modal fade" id="newCategoryModal" tabindex="-1" aria-labelledby="newCategoryModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newCategoryModalLabel">新建类别</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" id="closemodal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="newCategoryForm">
+                                    <div class="mb-3">
+                                        <label for="newCategoryName" class="form-label">类别名称</label>
+                                        <input form="newCategoryForm" type="text" class="form-control"
+                                            id="newCategoryName" name="newCategoryName" required>
+                                    </div>
+                                </form>
+                                <div id="newCategoryErrorMsg" class="text-danger"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" onclick="createNewCategory()">创建</button>
+                                <script>
+                                    function createNewCategory() {
+                                        const newCategoryName = document.getElementById("newCategoryName").value;
+                                        if (newCategoryName) {
+                                            // 发送POST请求到服务器端
+                                            fetch("{% url 'create_category' %}", {
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-Type": "application/x-www-form-urlencoded",
+                                                    "X-CSRFToken": "{{ csrf_token }}",
+                                                },
+                                                body: `name=${encodeURIComponent(newCategoryName)}`,
+                                            })
+                                                .then((response) => {
+                                                    if (!response.ok) {
+                                                        return response.json().then((errorData) => {
+                                                            document.getElementById("newCategoryErrorMsg").innerText = `创建类别失败: ${errorData.msg}`;
+                                                            // 这里不再抛出错误，而是直接结束当前Promise链
+                                                            return;
+                                                        });
+                                                    }
+                                                    return response.json();
+                                                })
+                                                .then((data) => {
+                                                    // 此处逻辑只有在HTTP状态码为200范围时才会执行
+                                                    const categorySelect = document.getElementById("category");
+                                                    const newOption = document.createElement("option");
+                                                    newOption.value = data.id;
+                                                    newOption.text = data.name;
+                                                    categorySelect.appendChild(newOption);
+
+
+                                                    alert("创建类别成功");
+                                                    //关闭模态框
+                                                    document.getElementById("closemodal").click();
+                                                })
+
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="image" class="form-label">封面图片</label>
+                <input form="blogForm" class="form-control" type="file" id="image" name="image">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">作者</label>
+            <input type="text" form="blogForm" class="form-control" id="author" name="author"
+                value="{{ user.username }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="summary" class="form-label">摘要</label>
+            <textarea form="blogForm" class="form-control" id="summary" name="summary" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="tags" class="form-label">标签</label>
+            <!-- 新增标签按钮 -->
+            <button type="button" class="btn btn-secondary ms-2 bi bi-plus-circle-fill btn-sm" data-bs-toggle="modal"
+                data-bs-target="#newTagModal" aria-label="新建标签"></button>
+            <select form="blogForm" class="form-select" id="tags" name="tags" multiple>
+                {% for tag in tags %}
+                <option value="{{ tag.id }}">{{ tag.name }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- 新建标签模态框 -->
+            <div class="modal fade" id="newTagModal" tabindex="-1" aria-labelledby="newTagModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="newTagModalLabel">新建标签</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" id="closetagmodal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="newTagForm">
+                                <div class="mb-3">
+                                    <label for="newTagName" class="form-label">标签名称</label>
+                                    <input type="text" class="form-control" id="newTagName" form="newTagForm"
+                                        name="newTagName" required>
+                                </div>
+                            </form>
+                            <div id="newTagErrorMsg" class="text-danger"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" onclick="createNewTag()">创建</button>
+                            <script>
+                                function createNewTag() {
+                                    const newTagName = document.getElementById("newTagName").value;
+                                    if (newTagName) {
+                                        // 发送POST请求到服务器端
+                                        fetch("{% url 'create_tag' %}", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/x-www-form-urlencoded",
+                                                "X-CSRFToken": "{{ csrf_token }}",
+                                            },
+                                            body: `name=${encodeURIComponent(newTagName)}`,
+                                        })
+                                            .then((response) => {
+                                                if (!response.ok) {
+                                                    return response.json().then((errorData) => {
+                                                        document.getElementById("newTagErrorMsg").innerText = `创建类别失败: ${errorData.msg}`;
+                                                        // 这里不再抛出错误，而是直接结束当前Promise链
+                                                        return;
+                                                    });
+                                                }
+                                                return response.json();
+                                            })
+                                            .then((data) => {
+                                                // 此处逻辑只有在HTTP状态码为200范围时才会执行
+                                                const tagSelect = document.getElementById("tags");
+                                                const newOption = document.createElement("option");
+                                                newOption.value = data.id;
+                                                newOption.text = data.name;
+                                                tagSelect.appendChild(newOption);
+
+
+                                                alert("创建类别成功");
+                                                //关闭模态框
+                                                document.getElementById("closetagmodal").click();
+                                            })
+
+                                    }
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" form="blogForm" class="btn btn-primary">发布博客</button>
+
+    </form>
+</main>
+<hr>
+
+
+{% endblock %}

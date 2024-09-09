@@ -1,0 +1,115 @@
+
+
+{% if result.Category %}
+{% if result.CategoryBlog %}
+{% for obj in result.Category %}
+{% if result.CategoryTop %}
+{% for obj2 in result.CategoryBlog.obj.blog__category %}
+
+
+{% if obj2.Length >= 9 %}
+<section class="category-section">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header d-flex justify-content-between align-items-center mb-5">
+        <h2>{{ obj.blog__category }}</h2>
+        <div><a href="/myblog/category.html" class="more">==》所有分类</a></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+
+          <div class="d-lg-flex post-entry-2">
+            <a href="/myblog/single-post.html" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+              <img src="/static/myblog/assets/img/post-landscape-6.jpg" alt="" class="img-fluid">
+            </a>
+            <div>
+              <div class="post-meta"><span class="date">{{ result.CategoryTop.[forloop.number-1].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ result.CategoryTop[forloop.number-1].blog.time }}</span></div>
+              <h3><a href="/myblog/single-post.html">{{ result.CategoryTop[forloop.number-1].blog.title }}</a></h3>
+              <p>{{ <result class="CategoryTop blog summary" forloop.number-1=""></result> }}</p>
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="/static/myblog/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0">{{ result.CategoryTop[forloop.number-1].blog.author }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="post-entry-1 border-bottom">
+                <a href="/myblog/single-post.html"><img src="/static/myblog/assets/img/post-landscape-1.jpg" alt="" class="img-fluid"></a>
+                <div class="post-meta"><span class="date">{{ obj2[0].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[0].blog.time }}</span></div>
+                <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[0].blog.title }}</a></h2>
+                <span class="author mb-3 d-block">{{ obj2[0].blog.author }}</span>
+                <p class="mb-4 d-block">{{ obj2[0].blog.summary }}</p>
+              </div>
+
+              <div class="post-entry-1">
+                <div class="post-meta"><span class="date">{{ obj2[1].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[1].blog.time }}</span></div>
+                <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[1].blog.title }}</a></h2>
+                <span class="author mb-3 d-block">{{ obj2[1].blog.summary }}</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="post-entry-1">
+                <a href="/myblog/single-post.html"><img src="/static/myblog/assets/img/post-landscape-2.jpg" alt="" class="img-fluid"></a>
+                <div class="post-meta"><span class="date">{{ obj2[2].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[2].blog.time }}</span></div>
+                <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[2].blog.title }}</a></h2>
+                <span class="author mb-3 d-block">{{ obj2[2].blog.author }}</span>
+                <p class="mb-4 d-block">{{ obj2[2].blog.summary }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="post-entry-1 border-bottom">
+            <div class="post-meta"><span class="date">{{ obj2[3].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[3].blog.time }}</span></div>
+            <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[3].blog.title }}</a></h2>
+            <span class="author mb-3 d-block">{{ obj2[3].blog.author }}</span>
+          </div>
+
+          <div class="post-entry-1 border-bottom">
+            <div class="post-meta"><span class="date">{{ obj2[4].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[4].blog.time }}</span></div>
+            <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[4].blog.title }}</a></h2>
+            <span class="author mb-3 d-block">{{ obj2[4].blog.author }}</span>
+          </div>
+
+          <div class="post-entry-1 border-bottom">
+            <div class="post-meta"><span class="date">{{ obj2[5].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[5].blog.time }}</span></div>
+            <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[5].blog.title }}</a></h2>
+            <span class="author mb-3 d-block">{{ obj2[5].blog.author }}</span>
+          </div>
+
+          <div class="post-entry-1 border-bottom">
+            <div class="post-meta"><span class="date">{{ obj2[6].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[6].blog.time }}</span></div>
+            <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[6].blog.title }}</a></h2>
+            <span class="author mb-3 d-block">{{ obj2[6].blog.author }}</span>
+          </div>
+
+          <div class="post-entry-1 border-bottom">
+            <div class="post-meta"><span class="date">{{ obj2[7].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[7].blog.time }}</span></div>
+            <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[7].blog.title }}</a></h2>
+            <span class="author mb-3 d-block">{{ obj2[7].blog.author }}</span>
+          </div>
+
+          <div class="post-entry-1 border-bottom">
+            <div class="post-meta"><span class="date">{{ obj2[8].blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ obj2[8].blog.time }}</span></div>
+            <h2 class="mb-2"><a href="/myblog/single-post.html">{{ obj2[8].blog.title }}</a></h2>
+            <span class="author mb-3 d-block">{{ obj2[8].blog.author }}</span>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% else %}
+  {% include 'index_category _section2.html' %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endif %}

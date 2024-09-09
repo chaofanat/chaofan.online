@@ -1,0 +1,69 @@
+{% load static %}
+<!--Footer-->
+<footer class="bg-light text-lg-start">
+
+
+
+
+  <div class="d-flex align-items-center justify-content-center container">
+
+    <div class="text-center py-4 align-items-center col-md-6">
+      <p>Follow me on social media</p>
+
+      <a class="btn btn-primary m-1" href="https://github.com/chaofanat" rel="nofollow" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+
+      <a class="btn btn-primary m-1" href="https://blog.csdn.net/qq_43276836" rel="nofollow" target="_blank">
+        <i class="fa-solid fa-blog"></i>
+      </a>
+
+      <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#qrCodeModal">
+        <i class="fa-brands fa-qq"></i>
+      </button>
+
+      <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#weixinModal">
+        <i class="fa-brands fa-weixin"></i>
+      </button>
+    </div>
+    <section class="col-md-6 text-center py-4 align-items-center">
+      <p class="d-flex justify-content-center align-items-center flex-column">
+       Register for free
+      </p>
+      <p class="d-flex justify-content-center align-items-center flex-column">
+        <a data-mdb-ripple-init type="button" class="btn  btn-rounded  btn-primary"
+          href="{% url 'account_signup'  %}">
+          Sign up!
+        </a>
+      </p>
+    </section>
+  </div>
+
+
+  <!-- Copyright -->
+  <div class="text-center p-3 text-white" style="
+    background: linear-gradient(
+      45deg,
+      rgba(29, 236, 197, 0.7),
+      rgba(91, 14, 214, 0.7) 100%
+    );
+  ">
+    <div class="copyright">
+      © Copyright <strong><span>ChaoFanOnline</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
+      <a class="text-white" ref="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2024052011号-1</a>&bullet;
+      <img src="{% static 'picture/beian.png' %}" width="16px" height="16px">
+      <a class="text-white" href=\"https://beian.mps.gov.cn/#/query/webSearch?code=51132102000222\" rel=\"noreferrer\"
+        target=\"_blank\">川公网安备51132102000222</a>
+    </div>
+  </div>
+  <!-- Copyright -->
+
+
+</footer>
+<!--Footer-->

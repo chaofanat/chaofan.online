@@ -1,0 +1,121 @@
+<header>
+
+    <!-- Navbar -->
+
+    <!-- Navbar -->
+
+    <!-- Background image -->
+    <div class="bg-image shadow-1-strong" style="height: 50vh;">
+        <video style="min-width: 100%; min-height: 100%;" playsinline autoplay muted loop>
+            <source class="h-100" src="media/appIndex/animation-intro-min.mp4" type="video/mp4" />
+        </video>
+        <div class="mask container-fluid" style="
+            background: linear-gradient(
+              45deg,
+              rgba(29, 236, 197, 0.7),
+              rgba(91, 14, 214, 0.7) 100%
+            );
+          ">
+            <nav class="navbar navbar-dark navbar-expand-lg" style="z-index: 2000;">
+                <div class="container-fluid col-md-12">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand nav-link" target="_blank" href="http://www.chaofan.online">
+                        <strong>ChaoFanOnline</strong>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-mdb-collapse-init
+                        data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarExample01">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" href="http://www.chaofan.online">网站导航</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin" rel="nofollow" target="_blank">管理站点</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/myblog" target="_blank">
+                                    博客站点
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/api/v1/docs" target="_blank">
+                                    API文档
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav d-flex flex-row align-items-center">
+                            <!-- Icons -->
+                            <li class="nav-item me-3 me-lg-0 mx-4">
+                                <a class="nav-link" href="https://github.com/chaofanat" rel="nofollow" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </li>
+
+                            <li class="nav-item me-3 me-lg-0 mx-4"></li>
+                            <a class="nav-link" href="https://blog.csdn.net/qq_43276836" rel="nofollow" target="_blank">
+                                <i class="fa-solid fa-blog"></i>
+                            </a>
+                            </li>
+                            <li class="nav-item me-3 me-lg-0 mx-4">
+                                <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#qrCodeModal">
+                                    <i class="fa-brands fa-qq"></i>
+                                </button>
+                            </li>
+                            <li class="nav-item me-3 me-lg-0 mx-4">
+                                <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#weixinModal">
+                                    <i class="fa-brands fa-weixin"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid justify-content-between d-flex flex-column align-items-center"
+                style="height: calc(100% - 58.59px);">
+                <div
+                    class="text-white p-4 d-flex flex-column align-items-center justify-content-center  row h-100 w-100">
+                    <p class="col-md-6" style="font-family:'Courier New', Courier, monospace ;font-size: large;">
+                        “如果你不冒险去做你害怕的事情，你就永远不会成功。”</p>
+                    <p class="col-md-6 text-end">——————<span><em>埃隆·马斯克</em></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+</header>
+<!-- 模态框 -->
+<div class="modal fade" id="qrCodeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="/media/appIndex/qq.jpg" alt="QR Code" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- weixin -->
+ <div class="modal fade" id="weixinModal" tabindex="-1" aria-labelledby="weixinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="/media/appIndex/weixin.jpg" alt="weixin Code" class="img-fluid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+ </div>

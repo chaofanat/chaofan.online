@@ -1,48 +1,11 @@
-#ninjia api
-from typing import Any
-from django.http import HttpRequest
-from ninja.security import HttpBearer
-from ninja_jwt.controller import NinjaJWTDefaultController
-from ninja_jwt.authentication import JWTBaseAuthentication
+
+###################################### session 认证 api #####################################################################
 from ninja_extra import NinjaExtraAPI
+from ninja.security.session import SessionAuth
+class DjangoSessionAuth(SessionAuth):
+    def authenticate(self, request, token=None):
 
-
-
-#jwt 认证器
-from django.contrib.auth import get_user_model
-class JWTTokenUser(HttpBearer,JWTBaseAuthentication):
-    def __init__(self) -> None:
-        super().__init__()
-        self.user_model = get_user_model()
-    def authenticate(self, request: HttpRequest, token: str) -> Any | None:
-        return super().jwt_authenticate(request, token)
-        
+        return super().authenticate(request,key=token)
     
-
-
-
-
-
-api = NinjaExtraAPI(auth=JWTTokenUser(),csrf=False,version='1.0.0')
-api.register_controllers(NinjaJWTDefaultController)
-
-
-
-
-####################################   测试api    ###################################################################
-@api.post("/bearer")
-def bearer(request):
-    return {'message': 'hello'}
-
-# @api.get("/add")
-# def add(request, a: int, b: int):
-#     return {"result": a + b}
-
-#####################################################################################################################
-# 注册路由,应用api转发
-api.add_router("/appindex", "appIndex.apis.router")
-
-
-
-
-
+api_session = NinjaExtraAPI(auth=DjangoSessionAuth(),version='0.0.0')
+api_session.add_router("/flashcard", "flashcard.api.router")

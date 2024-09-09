@@ -2,12 +2,18 @@ python manage.py makemigrations
 python manage.py migrate
 
 python manage.py collectstatic
+python run.py
+
+nginx
+nginx -s stop
 
 @REM 创建app
 python manage.py startapp appIndex
 
 @REM 创建超级用户
 python manage.py createsuperuser
+
+
 
 
 

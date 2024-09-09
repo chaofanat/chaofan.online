@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- 
+django templates example
+context:
+    comphtml:
+            id = models.AutoField(primary_key=True)
+            title = models.CharField(max_length=255)
+            content = models.TextField()
+            extrastyle = models.TextField()
+            author = models.ForeignKey(User, on_delete=models.CASCADE)
+            crerated_at = models.DateTimeField(auto_now_add=True)
+            updated_at = models.DateTimeField(auto_now=True)
+    user
+
+-->
+{% load static %}
+<html lang="en">
+    <head>
+        <title>Example {{ comphtml.title }}</title>
+        <meta charset="utf-8">
+        <link href="/static/picture/icon.PNG" rel="icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/library/bootstrap5/css/bootstrap.min.css' %}">
+        </link>
+        <style>
+            h1 {
+                font-size: 2rem;
+            }
+
+           {{ comphtml.extrastyle }}
+        </style>
+    </head>
+
+    <body>
+    
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ comphtml.content|safe }}
+                </div>
+            </div>
+        </div>
+        <script src="{% static '/library/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+    
+    </body>
+</html>

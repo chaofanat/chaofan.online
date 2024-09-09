@@ -1,0 +1,126 @@
+{% load i18n %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block head_title %}
+            {% endblock head_title %}
+        </title>
+
+        {% bootstrap_css %}
+        {% block extra_head %}
+        {% endblock extra_head %}
+
+        <style>
+            button {
+                margin-bottom: 5px;
+                width: 100%;
+                height: 50px;
+                font-size: 1.5rem;
+                font-weight: bold;
+                border-radius: 0;
+                background-color: #f8f9fa;
+                border: 1px solid #dee2e6;
+                color: #212529;
+                outline: none;
+                cursor: pointer;
+                transition: all .2s ease-in-out;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0);
+                &:hover {
+                    background-color: #e9ecef;
+                    border-color: #e9ecef;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        {% block body %}
+            {% if messages %}
+                <div class="container mt-3">
+                    <div class="alert alert-info">
+                        <strong>{% trans "Messages:" %}</strong>
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            {% if user.is_authenticated %}
+                                {% url 'account_email' as email_url %}
+                                {% if email_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ email_url }}">{% trans "Change Email" %}</a>
+                                    </li>
+                                {% endif %}
+                                {% url 'account_change_password' as change_password_url %}
+                                {% if change_password_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ change_password_url }}">{% trans "Change Password" %}</a>
+                                    </li>
+                                {% endif %}
+                                {% url 'socialaccount_connections' as connections_url %}
+                                {% if connections_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ connections_url }}">{% trans "Account Connections" %}</a>
+                                    </li>
+                                {% endif %}
+                                {% url 'mfa_index' as mfa_url %}
+                                {% if mfa_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ mfa_url }}">{% trans "Two-Factor Authentication" %}</a>
+                                    </li>
+                                {% endif %}
+                                {% url 'usersessions_list' as usersessions_list_url %}
+                                {% if usersessions_list_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ usersessions_list_url }}">{% trans "Sessions" %}</a>
+                                    </li>
+                                {% endif %}
+                                {% url 'account_logout' as logout_url %}
+                                {% if logout_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ logout_url }}">{% trans "Sign Out" %}</a>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                {% url 'account_login' as login_url %}
+                                {% if login_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ login_url }}">{% trans "Sign In" %}</a>
+                                    </li>
+                                {% endif %}
+                                {% url 'account_signup' as signup_url %}
+                                {% if signup_url %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ signup_url }}">{% trans "Sign Up" %}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock body %}
+        {% block extra_body %}
+            {% bootstrap_javascript %}
+        {% endblock extra_body %}
+    </body>
+</html>

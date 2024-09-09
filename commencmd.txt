@@ -1,0 +1,26 @@
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py collectstatic
+
+@REM 创建app
+python manage.py startapp appIndex
+
+@REM 创建超级用户
+python manage.py createsuperuser
+
+
+
+
+@REM 生成requirements.txt
+pip freeze > requirements.txt
+
+@REM 前提系统有安装 GUN gettext,并配置了系统环境变量
+@REM 生成中文翻译文件
+python manage.py makemessages -l zh_HANS
+
+@REM 生成英文翻译文件
+python manage.py makemessages -l en   
+
+@REM 编译翻译文件
+python manage.py compilemessages 

@@ -1,0 +1,219 @@
+<!-- 这是一个用户信息页面 -->
+{% load static %}
+{% load i18n %}
+<!-- 
+    模板参数 说明：
+      profile: 用户信息
+      user: 用户
+ -->
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>用户信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    </meta>
+    <link rel="stylesheet" href="{% static 'library/bootstrap5/css/bootstrap.min.css' %}">
+    </link>
+    <style>
+        .gradient-custom-2 {
+            /* fallback for old browsers */
+            background: #fbc2eb;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+        }
+
+        /* 在全局样式文件中添加这些样式 */
+        .profile-link {
+            display: inline-block;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+            font-size: small;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .profile-link:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+            /* 字体大小与h2 字体大小保持一致 */
+            font-size: 1.5rem;
+        }
+
+        .text-reset {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .text-reset:hover {
+            color: inherit;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"></button>
+        </div>
+    </nav> -->
+
+    <section class="h-100 gradient-custom-2">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center">
+                <div class="col col-lg-9 col-xl-8">
+                    <div class="card">
+                        <div class="rounded-top text-white d-flex flex-row"
+                            style="background-color: #000; height:200px;">
+                            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                                <img src="/media/{{ profile.image }}" alt="Generic placeholder image"
+                                    class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                    class="btn btn-outline-dark text-body" data-mdb-ripple-color="dark"
+                                    data-bs-toggle="modal" data-bs-target="#updateProfileModal" style="z-index: 1;">
+                                    {% trans "Edit Profile" %}
+                                </button>
+                            </div>
+                            <div class="ms-3" style="margin-top: 130px;">
+                                <h5>{{ user.username }}</h5>
+                                <p>{{ user.email }}</p>
+                            </div>
+                        </div>
+                        <div class="p-4 text-black bg-body-tertiary">
+                            <div class="d-flex justify-content-end align-items-center text-center py-1 text-body">
+                                <div>
+                                    <p class="mb-1 h5">
+                                        <a href="{{ profile.website }}"
+                                            class="profile-link text-reset text-decoration-none">
+                                            {{ profile.website }}
+                                        </a>
+                                    </p>
+                                    <p class="small text-muted mb-0">{% trans "website" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-4 text-black">
+                            <div class="mb-5  text-body">
+                                <p class="lead fw-normal mb-1">{% trans "Profile" %}</p>
+                                <div class="p-4 bg-body-tertiary">
+                                    <p class="font-italic mb-1">{{ profile.bio }}</p>
+                                </div>
+                            </div>
+
+                            <div class="mb-5  text-body">
+                                <p class="lead fw-normal mb-1">{% trans "Password" %}</p>
+                                <div class="p-4 bg-body-tertiary">
+                                    {% if user.has_usable_password %}
+                                    <input type="password" class="form-control" id="id_password" name="password"
+                                        value="********" readonly>
+                                    <a href="{% url 'account_change_password' %}" class="btn btn-primary mt-3">{% trans "Change password" %}</a>
+                                    {% else %}
+                                    <input type="password" class="form-control" id="id_password" name="password"
+                                        value="********" readonly>
+                                    <a href="{% url 'account_set_password' %}" class="btn btn-primary mt-3">{% trans "Set password" %}</a>
+                                    {% endif %}
+                                </div>
+                                <p class="lead fw-normal mb-1">{% trans "Email" %}</p>
+                                <div class="p-4 bg-body-tertiary">
+                                    {% if user.email %}
+                                    <input type="text" class="form-control" id="id_email" name="email"
+                                        placeholder=" {{ user.email }}" readonly>
+                                    <a href="{% url 'account_email' %}" class="btn btn-primary mt-3">{% trans "Change email" %}</a>
+                                    {% else %}
+                                    <input type="text" class="form-control" id="id_email" name="email"
+                                        placeholder="{% trans 'Set your email' %}" readonly>
+                                    <a href="{% url 'account_email' %}" class="btn btn-primary mt-3">{% trans "Set email" %}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="profileForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Bio</label>
+                            <textarea class="form-control" id="bio" rows="3">{{ profile.bio }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="website" class="form-label">Website</label>
+                            <input type="url" class="form-control" id="website" value="{{ profile.website }}">
+                        </div>
+                        <button type="submit" for="profileForm" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('profileForm');
+            const modal = new bootstrap.Modal(document.getElementById('updateProfileModal'));
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const bio = document.getElementById('bio').value;
+                const website = document.getElementById('website').value;
+
+                // 使用Ajax提交表单数据
+                fetch("{% url 'appUser:profile_edit' %}", {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ bio, website })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Profile updated successfully!');
+                            modal.hide();
+                            location.reload();
+                        } else {
+                            alert('Failed to update profile.');
+                            console.error(data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while updating the profile.');
+                    });
+            });
+        });
+    </script>
+
+    <script src="{% static 'library/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

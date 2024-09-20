@@ -8,7 +8,7 @@ class StoredFile(models.Model):
     id = models.AutoField(primary_key=True)
     
     # 文件对象
-    file = models.FileField(upload_to='objectsstorage/BaiduSyncdisk')
+    file = models.FileField(upload_to='objectsstorage/BaiduSyncdisk/objstorage')
     
     # 文件名
     filename = models.CharField(max_length=255)

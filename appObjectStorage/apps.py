@@ -1,8 +1,7 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class FlashcardConfig(AppConfig):
+class AppobjectstorageConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "flashcard"
-    verbose_name = _("Flashcard")
-    
+    name = "appObjectStorage"
+    verbose_name = _("appObjectStorage")

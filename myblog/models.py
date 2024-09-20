@@ -3,12 +3,17 @@ from django.db import models
 # Create your models here.
 #导入用户模型
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name = _("category")
+        verbose_name_plural = _("categories")
 
 from django.urls import reverse  
 class Tag(models.Model):
@@ -34,6 +39,10 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return reverse('myblog:category', kwargs={'pk': self.pk})
     
+    class Meta:
+        verbose_name = _("tag")
+        verbose_name_plural = _("tags")
+    
 
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)
@@ -51,6 +60,10 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = _("blog")
+        verbose_name_plural = _("blogs")
     
 #置顶博客
 class FeaturedBlog(models.Model):
@@ -70,6 +83,10 @@ class FeaturedBlog(models.Model):
     def __str__(self):
         return self.blog.title
     
+    class Meta:
+        verbose_name = _("featured blog")
+        verbose_name_plural = _("featured blogs")
+    
 
 
 
@@ -88,5 +105,5 @@ class Contact(models.Model):
     
     class Meta:
         ordering = ['-time']
-        verbose_name = "留言"
-        verbose_name_plural = "留言"
+        verbose_name = _("contact")
+        verbose_name_plural = _("contacts")

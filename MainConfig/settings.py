@@ -54,12 +54,16 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    #crispy_forms,模板表单美化
+    "crispy_forms",
+    "crispy_bootstrap5",
     # app
     'appIndex',
     'appUser',
     'myblog',
     'flashcard',
     'freehtml',
+    'appObjectStorage',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +99,15 @@ TEMPLATES = [
                 # `allauth` needs this from django
                 'django.template.context_processors.request',
             ],
+
+            # 自定义模板标签路径
+            "libraries": {
+                "custom_filters":'templatetags.custom_filters',
+            }
+                
+            
+
+        
             
         },
     },
@@ -220,3 +233,5 @@ EMAIL_USE_SSL = True   # 使用ssl
 # EMAIL_USE_SSL 和 EMAIL_USE_TLS 是互斥的，即只能有一个为 True
 
 
+#crispy_forms
+CRISPY_TEMPLATE_PACK = "bootstrap5"

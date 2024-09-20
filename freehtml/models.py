@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 class compHtml(models.Model):
 
@@ -18,4 +19,8 @@ class compHtml(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class  Meta:
+        verbose_name = _('compHtml')
+        verbose_name_plural = _('compHtmls')
     

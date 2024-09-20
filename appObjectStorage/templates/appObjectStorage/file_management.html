@@ -1,0 +1,124 @@
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>文件管理</title>
+  <link rel="stylesheet" href="/static/library/bootstrap5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/library/MDB/css/mdb.min.css">
+  </link>
+</head>
+
+<body>
+
+  <div class="container mt-5">
+      <!-- 分页导航条 -->
+<nav aria-label="Page navigation d-flex justify-content-center ">
+  <ul class="pagination">
+    {% for page in files.paginator.page_range %}
+      <li class="page-item {% if page == files.number %}active{% endif %}">
+        <a class="page-link" href="?page={{ page }}&q={{ search_query }}">{{ page }}</a>
+      </li>
+    {% endfor %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ files.paginator.num_pages }}&q={{ search_query }}">末页</a>
+    </li>
+
+     
+
+  </ul>
+  <form method="get" action="{% url 'file-management' %}">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" name="q" placeholder="搜索文件名称" value="{{ request.GET.q }}">
+      <button class="btn btn-primary" type="submit">搜索</button>
+    </div>
+  </form>
+  
+</nav>
+    <h1>文件管理</h1>
+    <hr>
+
+    <!-- 文件列表 -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>文件名</th>
+          <th>大小</th>
+          <th>类型</th>
+          <th>存储桶</th>
+          <th>描述</th>
+          <th>标签</th>
+          <th>上传时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file in files %}
+        <tr>
+          <td>{{ file.filename }}</td>
+          <td>{{ file.size|to_megabytes }} MB</td>
+          <td>{{ file.file_type }}</td>
+          <td>{{ file.bucket }}</td>
+          <td>{{ file.description }}</td>
+          <td>{{ file.tags }}</td>
+          <td>{{ file.upload_time }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="{{ file.get_absolute_url }}" target="_blank" class="btn btn-success">下载</a>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal{{ file.id }}">
+                更新
+              </button>
+              <form method="post" action="{% url 'file-management' %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="file_id" value="{{ file.id }}">
+                <button type="submit" class="btn btn-danger">删除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+
+        <!-- 更新模态框 -->
+        <div class="modal fade" id="updateModal{{ file.id }}" tabindex="-1" role="dialog"
+          aria-labelledby="updateModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">更新文件</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="{% url 'file-management' %}" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="update">
+                  <input type="hidden" name="file_id" value="{{ file.id }}">
+                  {{ update_form|crispy }}
+                  <button type="submit" class="btn btn-primary">保存</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- 创建文件表单 -->
+    <div class="mt-4">
+      <h3>创建新文件</h3>
+      <form method="post" action="{% url 'file-management' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="create">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">创建</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/library/bootstrap5/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/library/MDB/js/mdb.umd.min.js"></script>
+</body>
+
+</html>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-05 21:42+0800\n"
+"POT-Creation-Date: 2024-09-17 13:13+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\MainConfig\settings.py:158
+#: .\MainConfig\settings.py:190
 msgid "English"
 msgstr ""
 
-#: .\MainConfig\settings.py:159
+#: .\MainConfig\settings.py:191
 msgid "Simplified Chinese"
 msgstr ""
 
-#: .\appUser\models.py:21
+#: .\appIndex\apps.py:8
+msgid "appIndex"
+msgstr ""
+
+#: .\appObjectStorage\apps.py:7
+msgid "appObjectStorage"
+msgstr ""
+
+#: .\appUser\apps.py:8
+msgid "appUser"
+msgstr ""
+
+#: .\appUser\models.py:23 .\templates\account\profile.html:107
 msgid "Profile"
 msgstr ""
 
-#: .\appUser\models.py:22
+#: .\appUser\models.py:24
 msgid "Profiles"
+msgstr ""
+
+#: .\flashcard\apps.py:7 .\flashcard\models.py:43
+msgid "Flashcard"
+msgstr ""
+
+#: .\flashcard\models.py:20
+msgid "Flashcard Set"
+msgstr ""
+
+#: .\flashcard\models.py:21
+msgid "Flashcard Sets"
+msgstr ""
+
+#: .\flashcard\models.py:44
+msgid "Flashcards"
+msgstr ""
+
+#: .\flashcard\models.py:62
+msgid "Progress"
+msgstr ""
+
+#: .\flashcard\models.py:63
+msgid "Progresses"
+msgstr ""
+
+#: .\freehtml\apps.py:7
+msgid "FreeHTML"
+msgstr ""
+
+#: .\freehtml\models.py:24
+msgid "compHtml"
+msgstr ""
+
+#: .\freehtml\models.py:25
+msgid "compHtmls"
+msgstr ""
+
+#: .\myblog\apps.py:7
+msgid "Myblog"
+msgstr ""
+
+#: .\myblog\models.py:15
+msgid "category"
+msgstr ""
+
+#: .\myblog\models.py:16
+msgid "categories"
+msgstr ""
+
+#: .\myblog\models.py:43
+msgid "tag"
+msgstr ""
+
+#: .\myblog\models.py:44
+msgid "tags"
+msgstr ""
+
+#: .\myblog\models.py:65
+msgid "blog"
+msgstr ""
+
+#: .\myblog\models.py:66
+msgid "blogs"
+msgstr ""
+
+#: .\myblog\models.py:87
+msgid "featured blog"
+msgstr ""
+
+#: .\myblog\models.py:88
+msgid "featured blogs"
+msgstr ""
+
+#: .\myblog\models.py:108
+msgid "contact"
+msgstr ""
+
+#: .\myblog\models.py:109
+msgid "contacts"
 msgstr ""
 
 #: .\templates\account\account_inactive.html:5
@@ -205,11 +297,11 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: .\templates\account\login.html:31
-msgid "Or, sign in with:"
+#: .\templates\account\login.html:33
+msgid "Or"
 msgstr ""
 
-#: .\templates\account\login.html:47
+#: .\templates\account\login.html:43
 #, python-format
 msgid ""
 "If you have not created an account yet, then please\n"
@@ -325,6 +417,42 @@ msgstr ""
 msgid "Set Password"
 msgstr ""
 
+#: .\templates\account\profile.html:84
+msgid "Edit Profile"
+msgstr ""
+
+#: .\templates\account\profile.html:101
+msgid "website"
+msgstr ""
+
+#: .\templates\account\profile.html:114
+msgid "Password"
+msgstr ""
+
+#: .\templates\account\profile.html:119
+msgid "Change password"
+msgstr ""
+
+#: .\templates\account\profile.html:123
+msgid "Set password"
+msgstr ""
+
+#: .\templates\account\profile.html:126
+msgid "Email"
+msgstr ""
+
+#: .\templates\account\profile.html:131
+msgid "Change email"
+msgstr ""
+
+#: .\templates\account\profile.html:134
+msgid "Set your email"
+msgstr ""
+
+#: .\templates\account\profile.html:135
+msgid "Set email"
+msgstr ""
+
 #: .\templates\account\signup.html:6 .\templates\account\signup.html:7
 #: .\templates\socialaccount\signup.html:5
 msgid "Signup"
@@ -415,7 +543,7 @@ msgstr ""
 msgid "Sessions"
 msgstr ""
 
-#: .\templates\base.html:48
+#: .\templates\base.html:49
 msgid "Message"
 msgstr ""
 

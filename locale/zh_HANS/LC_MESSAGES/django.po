@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-05 21:42+0800\n"
+"POT-Creation-Date: 2024-09-19 19:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,97 +17,185 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\MainConfig\settings.py:158
+#: .\MainConfig\settings.py:190
 msgid "English"
-msgstr "英文"
+msgstr "英文" 
 
-#: .\MainConfig\settings.py:159
+#: .\MainConfig\settings.py:191
 msgid "Simplified Chinese"
-msgstr "简体中文"
+msgstr "简体中文" 
 
-#: .\appUser\models.py:21
+#: .\appIndex\apps.py:8
+msgid "appIndex"
+msgstr "主页app" 
+
+#: .\appObjectStorage\apps.py:7
+msgid "appObjectStorage"
+msgstr "对象存储app" 
+
+#: .\appUser\apps.py:8
+msgid "appUser"
+msgstr "用户app" 
+
+#: .\appUser\models.py:23 .\templates\account\profile.html:107
 msgid "Profile"
-msgstr "用户信息"
+msgstr "个人简介" 
 
-#: .\appUser\models.py:22
-#, fuzzy
-#| msgid "Profile"
+#: .\appUser\models.py:24
 msgid "Profiles"
-msgstr "用户信息"
+msgstr "个人简介" 
+
+#: .\flashcard\apps.py:7 .\flashcard\models.py:43
+msgid "Flashcard"
+msgstr "闪卡" 
+
+#: .\flashcard\models.py:20
+msgid "Flashcard Set"
+msgstr "闪卡集" 
+
+#: .\flashcard\models.py:21
+msgid "Flashcard Sets"
+msgstr "闪卡集" 
+
+#: .\flashcard\models.py:44
+msgid "Flashcards"
+msgstr "闪卡" 
+
+#: .\flashcard\models.py:62
+msgid "Progress"
+msgstr "进展" 
+
+#: .\flashcard\models.py:63
+msgid "Progresses"
+msgstr "进展" 
+
+#: .\freehtml\apps.py:7
+msgid "FreeHTML"
+msgstr "FreeHTML" 
+
+#: .\freehtml\models.py:24
+msgid "compHtml"
+msgstr "HTML组件" 
+
+#: .\freehtml\models.py:25
+msgid "compHtmls"
+msgstr "HTML组件" 
+
+#: .\myblog\apps.py:7
+msgid "Myblog"
+msgstr "博客" 
+
+#: .\myblog\models.py:15
+msgid "category"
+msgstr "类别" 
+
+#: .\myblog\models.py:16
+msgid "categories"
+msgstr "类别" 
+
+#: .\myblog\models.py:43
+msgid "tag"
+msgstr "标签" 
+
+#: .\myblog\models.py:44
+msgid "tags"
+msgstr "标签" 
+
+#: .\myblog\models.py:65
+msgid "blog"
+msgstr "博客" 
+
+#: .\myblog\models.py:66
+msgid "blogs"
+msgstr "博客" 
+
+#: .\myblog\models.py:87
+msgid "featured blog"
+msgstr "置顶博客" 
+
+#: .\myblog\models.py:88
+msgid "featured blogs"
+msgstr "置顶博客" 
+
+#: .\myblog\models.py:108
+msgid "contact"
+msgstr "联系人" 
+
+#: .\myblog\models.py:109
+msgid "contacts"
+msgstr "联系人" 
 
 #: .\templates\account\account_inactive.html:5
 #: .\templates\account\account_inactive.html:8
 msgid "Account Inactive"
-msgstr "账户未激活"
+msgstr "账户未激活" 
 
 #: .\templates\account\account_inactive.html:10
 msgid "This account is inactive."
-msgstr "此账户未激活。"
+msgstr "此账户未激活 。" 
 
 #: .\templates\account\email.html:6 .\templates\account\email.html:7
 #: .\templates\account\email.html:10
 msgid "E-mail Addresses"
-msgstr "电子邮件地址"
+msgstr "电子邮件地址" 
 
 #: .\templates\account\email.html:12
 msgid "The following e-mail addresses are associated with your account:"
-msgstr "以下电子邮件地址与您的账户关联："
+msgstr "下列电子邮件地址与您的账户有关:" 
 
 #: .\templates\account\email.html:26
 msgid "Verified"
-msgstr "已验证"
+msgstr "已验证" 
 
 #: .\templates\account\email.html:28
 msgid "Unverified"
-msgstr "未验证"
+msgstr "未验证" 
 
 #: .\templates\account\email.html:30
 msgid "Primary"
-msgstr "主要"
+msgstr "Primary" 
 
 #: .\templates\account\email.html:36
 msgid "Make Primary"
-msgstr "设为主要"
+msgstr "Make Primary" 
 
 #: .\templates\account\email.html:38
 msgid "Re-send Verification"
-msgstr "重新发送验证"
+msgstr "重新发送验证" 
 
 #: .\templates\account\email.html:40
 #: .\templates\mfa\webauthn\authenticator_confirm_delete.html:16
 #: .\templates\mfa\webauthn\authenticator_list.html:60
 #: .\templates\socialaccount\connections.html:40
 msgid "Remove"
-msgstr "移除"
+msgstr "移除" 
 
 #: .\templates\account\email.html:48
 msgid "Warning:"
-msgstr "警告："
+msgstr "警告 :" 
 
 #: .\templates\account\email.html:48
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
-"您当前没有设置任何电子邮件地址。您应该添加一个电子邮件地址以便接收通知、重置"
-"密码等。"
 
 #: .\templates\account\email.html:53
 msgid "Add E-mail Address"
-msgstr "添加电子邮件地址"
+msgstr "添加电子邮件地址" 
 
 #: .\templates\account\email.html:58
 msgid "Add E-mail"
-msgstr "添加电子邮件"
+msgstr "添加电子邮件" 
 
 #: .\templates\account\email.html:69
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
+msgstr "您真的要删除选中的电子邮件地址吗 ?" 
 
 #: .\templates\account\email\base_message.html:1
 #, python-format
 msgid "Hello from %(site_name)s!"
-msgstr "%(site_name)s 您好！"
+msgstr "来自%(site_name)s的问候!" 
 
 #: .\templates\account\email\base_message.html:5
 #, python-format
@@ -115,8 +203,6 @@ msgid ""
 "Thank you for using %(site_name)s!\n"
 "%(site_domain)s"
 msgstr ""
-"感谢您使用 %(site_name)s！\n"
-"%(site_domain)s"
 
 #: .\templates\account\email\email_confirmation_message.html:5
 #, python-format
@@ -126,14 +212,10 @@ msgid ""
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"您收到这封电子邮件是因为用户 %(user_display)s 提供了您的电子邮件地址以在 %"
-"(site_domain)s 注册账户。\n"
-"\n"
-"要确认这一点，请访问 %(activate_url)s"
 
 #: .\templates\account\email\email_confirmation_subject.html:3
 msgid "Please Confirm Your E-mail Address"
-msgstr "请确认您的电子邮件地址"
+msgstr "请确认您的电子邮件地址" 
 
 #: .\templates\account\email\password_reset_key_message.html:4
 msgid ""
@@ -142,22 +224,20 @@ msgid ""
 "It can be safely ignored if you did not request a password reset. Click the "
 "link below to reset your password."
 msgstr ""
-"您收到这封电子邮件是因为您或其他人请求了您的用户账户密码。\n"
-"如果您没有请求重置密码，则可以忽略此邮件。点击下面的链接来重置您的密码。"
 
 #: .\templates\account\email\password_reset_key_message.html:9
 #, python-format
 msgid "In case you forgot, your username is %(username)s."
-msgstr "以防您忘记，您的用户名是 %(username)s。"
+msgstr "为了防止您忘了, 您的用户名是%(username)s 。" 
 
 #: .\templates\account\email\password_reset_key_subject.html:3
 msgid "Password Reset E-mail"
-msgstr "密码重置电子邮件"
+msgstr "密码重置电子邮件" 
 
 #: .\templates\account\email_confirm.html:7
 #: .\templates\account\email_confirm.html:11
 msgid "Confirm E-mail Address"
-msgstr "确认电子邮件地址"
+msgstr "确认电子邮件地址" 
 
 #: .\templates\account\email_confirm.html:17
 #, python-format
@@ -165,13 +245,11 @@ msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
 "address for user %(user_display)s."
 msgstr ""
-"请确认 <a href=\"mailto:%(email)s\">%(email)s</a> 是用户 %(user_display)s 的"
-"电子邮件地址。"
 
 #: .\templates\account\email_confirm.html:21
 #: .\templates\mfa\reauthenticate.html:18
 msgid "Confirm"
-msgstr "确认"
+msgstr "确认" 
 
 #: .\templates\account\email_confirm.html:29
 #, python-format
@@ -179,8 +257,6 @@ msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a href=\"%"
 "(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
-"此电子邮件确认链接已过期或无效。请 <a href=\"%(email_url)s\">提交新的电子邮件"
-"确认请求</a>。"
 
 #: .\templates\account\header.html:8
 #: .\templates\account\password_change.html:6
@@ -194,14 +270,14 @@ msgstr ""
 #: .\templates\account\password_reset_from_key_done.html:7
 #: .\templates\allauth\layouts\base.html:72
 msgid "Change Password"
-msgstr "更改密码"
+msgstr "更改密码" 
 
 #: .\templates\account\header.html:9 .\templates\account\logout.html:6
 #: .\templates\account\logout.html:7 .\templates\account\logout.html:10
 #: .\templates\account\logout.html:19 .\templates\allauth\layouts\base.html:96
 #: .\templates\usersessions\usersession_list.html:64
 msgid "Sign Out"
-msgstr "登出"
+msgstr "登出" 
 
 #: .\templates\account\header.html:11 .\templates\account\login.html:7
 #: .\templates\account\login.html:8 .\templates\account\login.html:12
@@ -211,7 +287,7 @@ msgstr "登出"
 #: .\templates\openid\login.html:20 .\templates\socialaccount\login.html:5
 #: .\templates\socialaccount\login_redirect.html:5
 msgid "Sign In"
-msgstr "登录"
+msgstr "登陆" 
 
 #: .\templates\account\header.html:12 .\templates\account\signup.html:11
 #: .\templates\account\signup.html:21
@@ -219,76 +295,71 @@ msgstr "登录"
 #: .\templates\socialaccount\signup.html:9
 #: .\templates\socialaccount\signup.html:25
 msgid "Sign Up"
-msgstr "注册"
+msgstr "注册" 
 
-#: .\templates\account\login.html:31
-msgid "Or, sign in with:"
-msgstr "或者，使用三方登录"
+#: .\templates\account\login.html:33
+msgid "Or"
+msgstr "或" 
 
-#: .\templates\account\login.html:47
-#, fuzzy, python-format
-#| msgid ""
-#| "If you have not created an account yet, then please\n"
-#| "<a href=\"%(signup_url)s\">注册</a> 首先。"
+#: .\templates\account\login.html:43
+#, python-format
 msgid ""
 "If you have not created an account yet, then please\n"
 "<a href=\"%(signup_url)s\">sign up</a> first."
 msgstr ""
-"如果您还没有创建账户，请\n"
-"<a href=\"%(signup_url)s\">注册</a> 首先。"
 
 #: .\templates\account\logout.html:12
 msgid "Are you sure you want to sign out?"
-msgstr "您确定要登出吗？"
+msgstr "你确定要登出吗?" 
 
 #: .\templates\account\messages\cannot_delete_primary_email.html:2
 #, python-format
 msgid "You cannot remove your primary e-mail address (%(email)s)."
-msgstr "您不能移除您的主要电子邮件地址 (%(email)s)。"
+msgstr "您无法删除您的主电子邮件地址 (%(email)s) 。" 
 
 #: .\templates\account\messages\email_confirmation_sent.html:2
 #, python-format
 msgid "Confirmation e-mail sent to %(email)s."
-msgstr "已向 %(email)s 发送确认电子邮件。"
+msgstr "确认已发送到%(email)s 的电子邮件 。" 
 
 #: .\templates\account\messages\email_confirmed.html:2
 #, python-format
 msgid "You have confirmed %(email)s."
-msgstr "您已确认 %(email)s。"
+msgstr "您已经确认了%(email)s。" 
 
 #: .\templates\account\messages\email_deleted.html:2
 #, python-format
 msgid "Removed e-mail address %(email)s."
-msgstr "已移除电子邮件地址 %(email)s。"
+msgstr "删除电子邮件地址%(email)s" 
 
 #: .\templates\account\messages\logged_in.html:4
 #, python-format
 msgid "Successfully signed in as %(name)s."
-msgstr "成功以 %(name)s 登录。"
+msgstr "成功签名为 %(name)s 。" 
 
 #: .\templates\account\messages\logged_out.html:2
 msgid "You have signed out."
-msgstr "您已登出。"
+msgstr "您已经登出。" 
 
 #: .\templates\account\messages\password_changed.html:2
 msgid "Password successfully changed."
-msgstr "密码已成功更改。"
+msgstr "密码已成功更改 。" 
 
 #: .\templates\account\messages\password_set.html:2
 msgid "Password successfully set."
-msgstr "密码已成功设置。"
+msgstr "密码设置成功 。" 
 
 #: .\templates\account\messages\primary_email_set.html:2
 msgid "Primary e-mail address set."
-msgstr "主要电子邮件地址已设置。"
+msgstr "主要电子邮件地址集。" 
 
 #: .\templates\account\messages\unverified_primary_email.html:2
 msgid "Your primary e-mail address must be verified."
-msgstr "您的主要电子邮件地址必须经过验证。"
+msgstr "您的主要电子邮件地址必须验证 。" 
 
 #: .\templates\account\password_change.html:17
 msgid "Forgot Password?"
-msgstr "忘记密码？"
+msgstr "忘记密码了?" 
 
 #: .\templates\account\password_reset.html:7
 #: .\templates\account\password_reset.html:8
@@ -296,33 +367,33 @@ msgstr "忘记密码？"
 #: .\templates\account\password_reset_done.html:6
 #: .\templates\account\password_reset_done.html:9
 msgid "Password Reset"
-msgstr "重置密码"
+msgstr "密码重设" 
 
 #: .\templates\account\password_reset.html:17
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
-"忘记密码了吗？请输入您的电子邮件地址，我们将发送一封允许您重置密码的电子邮"
-"件。"
+"忘记密码了？在下面输入您的电子邮件地址，我们将向您发送"
+"一封允许您重置它的电子邮件。"
 
 #: .\templates\account\password_reset.html:22
 msgid "Reset My Password"
-msgstr "重置我的密码"
+msgstr "重置我的密码" 
 
 #: .\templates\account\password_reset.html:26
 msgid "Please contact us if you have any trouble resetting your password."
-msgstr "如果您在重置密码时遇到问题，请联系我们。"
+msgstr "如果您重设密码有问题, 请联系我们 。" 
 
 #: .\templates\account\password_reset_done.html:15
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
-msgstr "我们已向您发送了一封电子邮件。如果您在几分钟内未收到，请联系我们。"
+msgstr ""
 
 #: .\templates\account\password_reset_from_key.html:10
 msgid "Bad Token"
-msgstr "无效令牌"
+msgstr "错误的密钥" 
 
 #: .\templates\account\password_reset_from_key.html:14
 #, python-format
@@ -331,60 +402,95 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
-"密码重置链接无效，可能是因为它已被使用。请请求 <a href=\"%(passwd_reset_url)s"
-"\">新的密码重置</a>。"
 
 #: .\templates\account\password_reset_from_key.html:20
 msgid "change password"
-msgstr "更改密码"
+msgstr "更改密码" 
 
 #: .\templates\account\password_reset_from_key.html:23
 #: .\templates\account\password_reset_from_key_done.html:8
 msgid "Your password is now changed."
-msgstr "您的密码已更改。"
+msgstr "您的密码现已更改 。" 
 
 #: .\templates\account\password_set.html:6
 #: .\templates\account\password_set.html:7
 #: .\templates\account\password_set.html:10
 #: .\templates\account\password_set.html:15
 msgid "Set Password"
-msgstr "设置密码"
+msgstr "设置密码" 
+
+#: .\templates\account\profile.html:84
+msgid "Edit Profile"
+msgstr "编辑配置文件" 
+
+#: .\templates\account\profile.html:101
+msgid "website"
+msgstr "网站" 
+
+#: .\templates\account\profile.html:114
+msgid "Password"
+msgstr "密码" 
+
+#: .\templates\account\profile.html:119
+msgid "Change password"
+msgstr "更改密码" 
+
+#: .\templates\account\profile.html:123
+msgid "Set password"
+msgstr "设置密码" 
+
+#: .\templates\account\profile.html:126
+msgid "Email"
+msgstr "电子邮件" 
+
+#: .\templates\account\profile.html:131
+msgid "Change email"
+msgstr "更改电子邮件" 
+
+#: .\templates\account\profile.html:134
+msgid "Set your email"
+msgstr "设置您的电子邮件" 
+
+#: .\templates\account\profile.html:135
+msgid "Set email"
+msgstr "设置电子邮件" 
 
 #: .\templates\account\signup.html:6 .\templates\account\signup.html:7
 #: .\templates\socialaccount\signup.html:5
 msgid "Signup"
-msgstr "注册"
+msgstr "注册" 
 
 #: .\templates\account\signup.html:13
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr "已有账户？请 <a href=\"%(login_url)s\">登录</a>。"
+msgstr ""
+"已经注册过了吗？ 请 <a href=\"%(login_url)s\">登录</a>."
 
 #: .\templates\account\signup_closed.html:5
 #: .\templates\account\signup_closed.html:8
 msgid "Sign Up Closed"
-msgstr "注册关闭"
+msgstr "注册已关闭" 
 
 #: .\templates\account\signup_closed.html:10
 msgid "We are sorry, but the sign up is currently closed."
-msgstr "很抱歉，目前注册已关闭。"
+msgstr "我们很抱歉,但注册目前已经关闭。" 
 
 #: .\templates\account\snippets\already_logged_in.html:5
 msgid "Note"
-msgstr "注意"
+msgstr "注意" 
 
 #: .\templates\account\snippets\already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
-msgstr "您已作为 %(user_display)s 登录。"
+msgstr "您已登录为%(user_display)s 。" 
 
 #: .\templates\account\verification_sent.html:5
 #: .\templates\account\verification_sent.html:8
 #: .\templates\account\verified_email_required.html:5
 #: .\templates\account\verified_email_required.html:8
 msgid "Verify Your E-mail Address"
-msgstr "验证您的电子邮件地址"
+msgstr "校验您的电子邮件地址" 
 
 #: .\templates\account\verification_sent.html:10
 msgid ""
@@ -392,8 +498,6 @@ msgid ""
 "finalize the signup process. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
-"我们已向您发送了一封用于验证的电子邮件。请按照提供的链接完成注册过程。如果您"
-"在几分钟内未收到，请联系我们。"
 
 #: .\templates\account\verified_email_required.html:12
 msgid ""
@@ -401,8 +505,6 @@ msgid ""
 "you are who you claim to be. For this purpose, we require that you\n"
 "verify ownership of your e-mail address. "
 msgstr ""
-"本网站的这一部分需要我们验证您的身份。为此，我们需要您验证您的电子邮件地址的"
-"所有权。"
 
 #: .\templates\account\verified_email_required.html:16
 msgid ""
@@ -410,8 +512,6 @@ msgid ""
 "verification. Please click on the link inside this e-mail. Please\n"
 "contact us if you do not receive it within a few minutes."
 msgstr ""
-"我们已向您发送了一封用于验证的电子邮件。请单击此电子邮件中的链接。如果您在几"
-"分钟内未收到，请联系我们。"
 
 #: .\templates\account\verified_email_required.html:20
 #, python-format
@@ -419,42 +519,36 @@ msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
 "mail address</a>."
 msgstr ""
-"<strong>注意：</strong>您仍然可以 <a href=\"%(email_url)s\">更改您的电子邮件"
-"地址</a>。"
 
 #: .\templates\allauth\layouts\base.html:46
-#, fuzzy
-#| msgid "Message"
 msgid "Messages:"
-msgstr "消息"
+msgstr "消息 :" 
 
 #: .\templates\allauth\layouts\base.html:66
 msgid "Change Email"
-msgstr ""
+msgstr "更改电子邮件" 
 
 #: .\templates\allauth\layouts\base.html:78
 #: .\templates\socialaccount\connections.html:5
 #: .\templates\socialaccount\connections.html:9
-#, fuzzy
-#| msgid "Account Inactive"
 msgid "Account Connections"
-msgstr "账户未激活"
+msgstr "账户连接" 
 
 #: .\templates\allauth\layouts\base.html:84
 #: .\templates\mfa\authenticate.html:10 .\templates\mfa\index.html:5
 #: .\templates\mfa\index.html:9
 msgid "Two-Factor Authentication"
-msgstr ""
+msgstr "两要素验证" 
 
 #: .\templates\allauth\layouts\base.html:90
 #: .\templates\usersessions\usersession_list.html:6
 #: .\templates\usersessions\usersession_list.html:10
 msgid "Sessions"
-msgstr ""
+msgstr "会话" 
 
-#: .\templates\base.html:48
+#: .\templates\base.html:49
 msgid "Message"
-msgstr "消息"
+msgstr "消息" 
 
 #: .\templates\mfa\authenticate.html:13
 msgid ""
@@ -464,16 +558,16 @@ msgstr ""
 
 #: .\templates\mfa\authenticate.html:31
 msgid "Alternative options"
-msgstr ""
+msgstr "备选办法" 
 
 #: .\templates\mfa\authenticate.html:36
 #: .\templates\mfa\webauthn\reauthenticate.html:15
 msgid "Use a security key"
-msgstr ""
+msgstr "使用安全密钥" 
 
 #: .\templates\mfa\authenticate.html:41
 msgid "Cancel"
-msgstr ""
+msgstr "取消" 
 
 #: .\templates\mfa\email\recovery_codes_generated_message.txt:4
 msgid ""
@@ -482,95 +576,94 @@ msgstr ""
 
 #: .\templates\mfa\email\recovery_codes_generated_subject.txt:3
 msgid "New Recovery Codes Generated"
-msgstr ""
+msgstr "生成的新回收代码" 
 
 #: .\templates\mfa\email\totp_activated_message.txt:4
 #: .\templates\mfa\messages\totp_activated.txt:2
 msgid "Authenticator app activated."
-msgstr ""
+msgstr "验证程序启动 。" 
 
 #: .\templates\mfa\email\totp_activated_subject.txt:3
 msgid "Authenticator App Activated"
-msgstr ""
+msgstr "认证应用程序已激活 。" 
 
 #: .\templates\mfa\email\totp_deactivated_message.txt:4
 #: .\templates\mfa\messages\totp_deactivated.txt:2
 msgid "Authenticator app deactivated."
-msgstr ""
+msgstr "认证应用程序已关闭 。" 
 
 #: .\templates\mfa\email\totp_deactivated_subject.txt:3
 msgid "Authenticator App Deactivated"
-msgstr ""
+msgstr "认证应用程序取消激活" 
 
 #: .\templates\mfa\email\webauthn_added_message.txt:4
 msgid "A new security key has been added."
-msgstr ""
+msgstr "添加了新的安全密钥 。" 
 
 #: .\templates\mfa\email\webauthn_added_subject.txt:3
 msgid "Security Key Added"
-msgstr ""
+msgstr "已添加安全密钥" 
 
 #: .\templates\mfa\email\webauthn_removed_message.txt:4
 msgid "A security key has been removed."
-msgstr ""
+msgstr "安全密钥已被删除 。" 
 
 #: .\templates\mfa\email\webauthn_removed_subject.txt:3
 msgid "Security Key Removed"
-msgstr ""
+msgstr "已删除安全密钥" 
 
 #: .\templates\mfa\index.html:14 .\templates\mfa\totp\base.html:4
 msgid "Authenticator App"
-msgstr ""
+msgstr "认证应用程序" 
 
 #: .\templates\mfa\index.html:19
 msgid "Authentication using an authenticator app is active."
-msgstr ""
+msgstr "使用验证程序应用程序进行身份验证已激活 。" 
 
 #: .\templates\mfa\index.html:23
 msgid "An authenticator app is not active."
-msgstr ""
+msgstr "一个验证应用程序不活动 。" 
 
 #: .\templates\mfa\index.html:32 .\templates\mfa\totp\deactivate_form.html:24
 msgid "Deactivate"
-msgstr ""
+msgstr "取消激活" 
 
 #: .\templates\mfa\index.html:36 .\templates\mfa\totp\activate_form.html:32
 msgid "Activate"
-msgstr ""
+msgstr "激活" 
 
 #: .\templates\mfa\index.html:45
 #: .\templates\mfa\webauthn\authenticator_list.html:8
 #: .\templates\mfa\webauthn\base.html:4
 msgid "Security Keys"
-msgstr ""
+msgstr "安全密钥" 
 
 #: .\templates\mfa\index.html:50
 #, python-format
 msgid "You have added %(count)s security key."
 msgid_plural "You have added %(count)s security keys."
 msgstr[0] ""
+msgstr[1] ""
 
 #: .\templates\mfa\index.html:54
 #: .\templates\mfa\webauthn\authenticator_list.html:12
 msgid "No security keys have been added."
-msgstr ""
+msgstr "没有添加安全密钥 。" 
 
 #: .\templates\mfa\index.html:62
-#, fuzzy
-#| msgid "Message"
 msgid "Manage"
-msgstr "消息"
+msgstr "管理" 
 
 #: .\templates\mfa\index.html:67 .\templates\mfa\webauthn\add_form.html:18
 #: .\templates\mfa\webauthn\authenticator_list.html:70
 msgid "Add"
-msgstr ""
+msgstr "添加" 
 
 #: .\templates\mfa\index.html:77 .\templates\mfa\recovery_codes\base.html:4
 #: .\templates\mfa\recovery_codes\generate.html:6
 #: .\templates\mfa\recovery_codes\index.html:6
 msgid "Recovery Codes"
-msgstr ""
+msgstr "追回代码" 
 
 #: .\templates\mfa\index.html:82 .\templates\mfa\recovery_codes\index.html:9
 #, python-format
@@ -579,68 +672,69 @@ msgid ""
 msgid_plural ""
 "There are %(unused_count)s out of %(total_count)s recovery codes available."
 msgstr[0] ""
+msgstr[1] ""
 
 #: .\templates\mfa\index.html:86
 msgid "No recovery codes set up."
-msgstr ""
+msgstr "没有设置恢复代码。" 
 
 #: .\templates\mfa\index.html:96
 msgid "View"
-msgstr ""
+msgstr "视图" 
 
 #: .\templates\mfa\index.html:102
 msgid "Download"
-msgstr ""
+msgstr "下载" 
 
 #: .\templates\mfa\index.html:110
 #: .\templates\mfa\recovery_codes\generate.html:29
 msgid "Generate"
-msgstr ""
+msgstr "生成" 
 
 #: .\templates\mfa\messages\recovery_codes_generated.txt:2
 msgid "A new set of recovery codes has been generated."
-msgstr ""
+msgstr "已经产生了一套新的回收代码。" 
 
 #: .\templates\mfa\messages\webauthn_added.txt:2
 msgid "Security key added."
-msgstr ""
+msgstr "添加了安全键 。" 
 
 #: .\templates\mfa\messages\webauthn_removed.txt:2
 msgid "Security key removed."
-msgstr ""
+msgstr "安全密钥已删除 。" 
 
 #: .\templates\mfa\reauthenticate.html:6
 msgid "Enter an authenticator code:"
-msgstr ""
+msgstr "输入验证码 :" 
 
 #: .\templates\mfa\recovery_codes\generate.html:9
 msgid "You are about to generate a new set of recovery codes for your account."
-msgstr ""
+msgstr "您即将为您的账户生成一套新的回收代码 。" 
 
 #: .\templates\mfa\recovery_codes\generate.html:11
 msgid "This action will invalidate your existing codes."
-msgstr ""
+msgstr "这将使您现有的代码失效 。" 
 
 #: .\templates\mfa\recovery_codes\generate.html:13
 msgid "Are you sure?"
-msgstr ""
+msgstr "你确定吗?" 
 
 #: .\templates\mfa\recovery_codes\index.html:13
 msgid "Unused codes"
-msgstr ""
+msgstr "未使用的代码" 
 
 #: .\templates\mfa\recovery_codes\index.html:25
 msgid "Download codes"
-msgstr ""
+msgstr "下载代码" 
 
 #: .\templates\mfa\recovery_codes\index.html:30
 msgid "Generate new codes"
-msgstr ""
+msgstr "生成新代码" 
 
 #: .\templates\mfa\totp\activate_form.html:4
 #: .\templates\mfa\totp\activate_form.html:8
 msgid "Activate Authenticator App"
-msgstr ""
+msgstr "激活验证程序 App" 
 
 #: .\templates\mfa\totp\activate_form.html:11
 msgid ""
@@ -651,7 +745,7 @@ msgstr ""
 
 #: .\templates\mfa\totp\activate_form.html:21
 msgid "Authenticator secret"
-msgstr ""
+msgstr "认证秘密" 
 
 #: .\templates\mfa\totp\activate_form.html:24
 msgid ""
@@ -662,7 +756,7 @@ msgstr ""
 #: .\templates\mfa\totp\deactivate_form.html:5
 #: .\templates\mfa\totp\deactivate_form.html:9
 msgid "Deactivate Authenticator App"
-msgstr ""
+msgstr "禁用身份验证器" 
 
 #: .\templates\mfa\totp\deactivate_form.html:12
 msgid ""
@@ -672,76 +766,70 @@ msgstr ""
 
 #: .\templates\mfa\webauthn\add_form.html:7
 msgid "Add Security Key"
-msgstr ""
+msgstr "添加安全密钥" 
 
 #: .\templates\mfa\webauthn\authenticator_confirm_delete.html:6
 msgid "Remove Security Key"
-msgstr ""
+msgstr "删除安全密钥" 
 
 #: .\templates\mfa\webauthn\authenticator_confirm_delete.html:9
-#, fuzzy
-#| msgid "Are you sure you want to sign out?"
 msgid "Are you sure you want to remove this security key?"
-msgstr "您确定要登出吗？"
+msgstr "您确定要删除此安全密钥吗 ?" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:18
 msgid "Key"
-msgstr ""
+msgstr "密钥" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:21
-#, fuzzy
-#| msgid "Message"
 msgid "Usage"
-msgstr "消息"
+msgstr "用法" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:33
 msgid "Passkey"
-msgstr ""
+msgstr "通行密钥" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:37
 msgid "Security key"
-msgstr ""
+msgstr "安全密钥" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:40
 msgid "This key does not indicate whether it is a passkey."
-msgstr ""
+msgstr "此密钥未显示它是否是一个通行密钥 。" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:41
-#, fuzzy
-#| msgid "Unverified"
 msgid "Unspecified"
-msgstr "未验证"
+msgstr "未具体说明" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:46
 #, python-format
 msgid "Added on %(created_at)s"
-msgstr ""
+msgstr "添加于 %(created_at)s" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:48
 #, python-format
 msgid "Last used %(last_used)s"
-msgstr ""
+msgstr "上次使用的 %(last_used)s" 
 
 #: .\templates\mfa\webauthn\authenticator_list.html:56
 msgid "Edit"
-msgstr ""
+msgstr "编辑" 
 
 #: .\templates\mfa\webauthn\edit_form.html:7
 msgid "Edit Security Key"
-msgstr ""
+msgstr "编辑安全密钥" 
 
 #: .\templates\mfa\webauthn\edit_form.html:18
 msgid "Save"
-msgstr ""
+msgstr "保存" 
 
 #: .\templates\mfa\webauthn\snippets\scripts.html:2
 msgid "This functionality requires JavaScript."
-msgstr ""
+msgstr "此功能需要 JavaScript 功能 。" 
 
 #: .\templates\socialaccount\authentication_error.html:5
 #: .\templates\socialaccount\authentication_error.html:9
 msgid "Third-Party Login Failure"
-msgstr ""
+msgstr "第三方登录失败" 
 
 #: .\templates\socialaccount\authentication_error.html:12
 msgid ""
@@ -756,11 +844,11 @@ msgstr ""
 
 #: .\templates\socialaccount\connections.html:46
 msgid "You currently have no third-party accounts connected to this account."
-msgstr ""
+msgstr "您目前没有与此账户连接的第三方账户 。" 
 
 #: .\templates\socialaccount\connections.html:50
 msgid "Add a Third-Party Account"
-msgstr ""
+msgstr "增加第三方账户a" 
 
 #: .\templates\socialaccount\email\account_connected_message.txt:4
 #, python-format
@@ -770,7 +858,7 @@ msgstr ""
 
 #: .\templates\socialaccount\email\account_connected_subject.txt:3
 msgid "Third-Party Account Connected"
-msgstr ""
+msgstr "第三方账户连接账户" 
 
 #: .\templates\socialaccount\email\account_disconnected_message.txt:4
 #, python-format
@@ -781,37 +869,37 @@ msgstr ""
 
 #: .\templates\socialaccount\email\account_disconnected_subject.txt:3
 msgid "Third-Party Account Disconnected"
-msgstr ""
+msgstr "第三方账户分离" 
 
 #: .\templates\socialaccount\login.html:10
 #, python-format
 msgid "Connect %(provider)s"
-msgstr ""
+msgstr "连接 %(provider)s" 
 
 #: .\templates\socialaccount\login.html:13
 #, python-format
 msgid "You are about to connect a new third-party account from %(provider)s."
-msgstr ""
+msgstr "您即将从 %(provider)s 连接一个新的第三方账户 。" 
 
 #: .\templates\socialaccount\login.html:17
 #, python-format
 msgid "Sign In Via %(provider)s"
-msgstr ""
+msgstr "使用 Via %(provider)s 登录" 
 
 #: .\templates\socialaccount\login.html:20
 #, python-format
 msgid "You are about to sign in using a third-party account from %(provider)s."
-msgstr ""
+msgstr "您即将登录，使用来自 %(provider)s 的第三方账户 。" 
 
 #: .\templates\socialaccount\login.html:27
 #: .\templates\socialaccount\login_redirect.html:10
 msgid "Continue"
-msgstr ""
+msgstr "继续" 
 
 #: .\templates\socialaccount\login_cancelled.html:5
 #: .\templates\socialaccount\login_cancelled.html:9
 msgid "Login Cancelled"
-msgstr ""
+msgstr "登录已取消" 
 
 #: .\templates\socialaccount\login_cancelled.html:13
 #, python-format
@@ -823,15 +911,15 @@ msgstr ""
 
 #: .\templates\socialaccount\messages\account_connected.txt:2
 msgid "The third-party account has been connected."
-msgstr ""
+msgstr "第三方账户已经连接。" 
 
 #: .\templates\socialaccount\messages\account_connected_other.txt:2
 msgid "The third-party account is already connected to a different account."
-msgstr ""
+msgstr "第三方账户已经与另一个账户连接。" 
 
 #: .\templates\socialaccount\messages\account_disconnected.txt:2
 msgid "The third-party account has been disconnected."
-msgstr ""
+msgstr "第三方账户已断开 。" 
 
 #: .\templates\socialaccount\signup.html:12
 #, python-format
@@ -842,47 +930,32 @@ msgstr ""
 
 #: .\templates\socialaccount\snippets\login.html:10
 msgid "Or use a third-party"
-msgstr ""
+msgstr "或使用第三方" 
 
 #: .\templates\usersessions\messages\sessions_logged_out.txt:2
 msgid "Signed out of all other sessions."
-msgstr ""
+msgstr "所有其他会议均签署。" 
 
 #: .\templates\usersessions\usersession_list.html:23
 msgid "Started At"
-msgstr ""
+msgstr "开始于" 
 
 #: .\templates\usersessions\usersession_list.html:24
-#, fuzzy
-#| msgid "E-mail Addresses"
 msgid "IP Address"
-msgstr "电子邮件地址"
+msgstr "IP 地址" 
 
 #: .\templates\usersessions\usersession_list.html:25
 msgid "Browser"
-msgstr ""
+msgstr "浏览器" 
 
 #: .\templates\usersessions\usersession_list.html:27
 msgid "Last seen at"
-msgstr ""
+msgstr "上一次观察于" 
 
 #: .\templates\usersessions\usersession_list.html:47
 msgid "Current"
-msgstr ""
+msgstr "目前" 
 
 #: .\templates\usersessions\usersession_list.html:60
 msgid "Sign Out Other Sessions"
-msgstr ""
-
-#~ msgid ""
-#~ "Please sign in with one\n"
-#~ "of your existing third party accounts. Or, <a href=\"%(signup_url)s"
-#~ "\">sign up</a>\n"
-#~ "for a %(site_name)s account and sign in below:"
-#~ msgstr ""
-#~ "请使用您现有的第三方账户之一登录。或者，<a href=\"%(signup_url)s\">注册</"
-#~ "a>\n"
-#~ "一个 %(site_name)s 账户并在此处登录："
-
-#~ msgid "or"
-#~ msgstr "或"
+msgstr "登出其他会话" 

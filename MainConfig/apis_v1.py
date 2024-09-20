@@ -42,6 +42,7 @@ def bearer(request):
 # 注册路由,应用api转发
 api.add_router("/appindex", "appIndex.apis.router")
 api.add_router("/flashcard", "flashcard.api_v1.router")
+api.add_router("/objectstorage", "appObjectStorage.apis.router")
 
 
 

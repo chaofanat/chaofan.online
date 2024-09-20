@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils.translation import gettext_lazy as _
 class FlashcardSet(models.Model):
     """
     A model representing a set of flashcards.
@@ -17,6 +17,8 @@ class FlashcardSet(models.Model):
     class Meta:
         ordering = ['title']
         unique_together = ('title', 'user')
+        verbose_name = _('Flashcard Set')
+        verbose_name_plural = _('Flashcard Sets')
 
     def __str__(self):
         return self.title
@@ -38,6 +40,8 @@ class Flashcard(models.Model):
     class Meta:
         unique_together = ('front_content',  'cardset')
         ordering = ['cardset', 'knowledge_level']
+        verbose_name = _('Flashcard')
+        verbose_name_plural = _('Flashcards')
 
     def __str__(self):
         return f"{self.front_content} -> {self.back_content}"
@@ -54,6 +58,9 @@ class Progress(models.Model):
 
     class Meta:
         unique_together = ('user', 'flashcard_set')
+        ordering = ['-last_reviewed']
+        verbose_name = _('Progress')
+        verbose_name_plural = _('Progresses')
 
     def __str__(self):
         return f"Progress for {self.user.username} in {self.flashcard_set.title}"

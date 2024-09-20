@@ -20,5 +20,7 @@ class Profile(models.Model):
         ordering = ['-created_at']
         get_latest_by = 'created_at'
         default_related_name = 'profile'
+        verbose_name = _('Profile')
+        verbose_name_plural = _('Profiles')
         
 

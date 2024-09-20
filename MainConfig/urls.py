@@ -48,6 +48,11 @@ urlpatterns += [
     path('freehtml/', include('freehtml.urls')),
 ]
 
+#add objectstorage app
+urlpatterns += [
+    path('objectstorage/', include('appObjectStorage.urls')),
+]
+
 
 #ninjia api
 from .apis import api_session
